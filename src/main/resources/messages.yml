@@ -26,7 +26,13 @@ Death_Effects_Applied: "#00D4FFEnjoy your new cool death effects!"
 Death_Effects_Removed: "#00D4FFBack to the old boring deaths."
 
 # Sets the message players get when money gets taken from their account when they die.
-Death_Money: "#00D4FF The amount of $#FF003E%money_taken% #00D4FFhas been taken from your account to pay for the death costs"
+Death_Money: "#00D4FF The amount of $#ff4a4a%money_taken% #00D4FFhas been taken from your account to pay for the death costs"
+
+# Sets the message players get when they don't have the money for the death cost.
+Death_Penalty: "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"
+
+# Sets the message players get when they try to remove the penalty effects.
+Failed_Penalty_Removal: "#ff4a4aSorry, but you can not remove the penalty effects."
 
 # Sets the message players get when their inventory is saved
 Inventory_Saved: "#00D4FFAll your inventory items have been saved!"
