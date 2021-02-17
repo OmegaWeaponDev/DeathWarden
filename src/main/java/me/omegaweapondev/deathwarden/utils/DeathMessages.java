@@ -136,10 +136,19 @@ public class DeathMessages {
     }
 
     if(configFile.getBoolean("Death_By_Player_Messages")) {
+      String weapon;
+
+      if(killer.getInventory().getItemInMainHand() == null) {
+        weapon = "Punched";
+      } else {
+        weapon = (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name();
+      }
+
+
       Utilities.broadcast(messageHandler.string("PvP_Death_Messages.Killed_By_Player", "&c%killer% &bhas just killed &c%player% &busing &c%weapon% &band they only had &c%hearts_remaining% &bhearts left!")
         .replace("%player%", player.getName())
         .replace("%killer%", killer.getName())
-        .replace("%weapon%", (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name())
+        .replace("%weapon%", weapon)
         .replace("%hearts_remaining%", String.valueOf(killer.getHealth() / 2))
       );
     }

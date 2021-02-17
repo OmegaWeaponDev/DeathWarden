@@ -34,6 +34,8 @@ public class SoundMenu extends MenuCreator {
 
     int slot = -2;
 
+    Utilities.logInfo(true, "Death Sounds: " + deathEffectsConfig.getConfigurationSection("Death_Sounds_Menu.Sounds").getKeys(false).size());
+
     for(String itemName : deathEffectsConfig.getConfigurationSection("Death_Sounds_Menu.Sounds").getKeys(false)) {
 
       if (slot++ > 33) {

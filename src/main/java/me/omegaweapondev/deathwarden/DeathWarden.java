@@ -52,9 +52,17 @@ public class DeathWarden extends JavaPlugin {
     }
 
     if(!MenuCreator.getOpenInventories().isEmpty()) {
-      particleMenu.deleteInventory();
-      soundMenu.deleteInventory();
-      deathEffectsMenu.deleteInventory();
+      if(particleMenu != null) {
+        particleMenu.deleteInventory();
+      }
+
+      if(soundMenu != null) {
+        soundMenu.deleteInventory();
+      }
+
+      if(deathEffectsMenu != null) {
+        deathEffectsMenu.deleteInventory();
+      }
     }
 
     storageManager.getDeathEffectsMap().clear();
