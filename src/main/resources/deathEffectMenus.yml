@@ -1,0 +1,242 @@
+# -------------------------------------------------------------------------------------------
+#
+#  Welcome to DeathWarden's Death Effects file.
+#
+#  Fully customise the look and feel of the Death Effects menus.
+#
+# -------------------------------------------------------------------------------------------
+
+Death_Effects_Menu:
+  Menu_Title: ""
+  Death_Sounds_Button:
+    Title: ""
+    Material: ""
+    Lore:
+      - ""
+      - ""
+      - ""
+  Death_Particles_Button:
+    Title: ""
+    Material: ""
+    Lore:
+      - ""
+      - ""
+      - ""
+
+Death_Sounds_Menu:
+  Menu_Title: ""
+  Sounds:
+    Ambient_Cave:
+      Material: MINECART
+      Title: "&3Ambient Cave"
+      Lore:
+        - "&cClick here to add"
+        - "&can ambient cave sound"
+        - "&cto your warp!"
+    Block_Anvil_Drop:
+      Material: ANVIL
+      Title: "&3Anvil Drop"
+      Lore:
+        - "&cClick here to add"
+        - "&can anvil drop sound"
+        - "&cto your warp!"
+    Block_Campfire_Crackle:
+      Material: CAMPFIRE
+      Title: "&3Campfire Crackle"
+      Lore:
+        - "&cClick here to add"
+        - "&ca campfire crackling sound"
+        - "&cto your warp!"
+    Block_Chest_Open:
+      Material: CHEST
+      Title: "&3Chest Opening"
+      Lore:
+        - "&cClick here to add"
+        - "&ca chest opening sound"
+        - "&cto your warp!"
+    Block_Glass_Break:
+      Material: GLASS
+      Title: "&3End Gateway Spawn"
+      Lore:
+        - "&cClick here to add"
+        - "&can end gateway spawning sound"
+        - "&cto your warp!"
+    Block_End_Portal_Frame_Fill:
+      Material: END_PORTAL_FRAME
+      Title: "&3End Portal Frame Fill"
+      Lore:
+        - "&cClick here to add"
+        - "&can end portal frame fill sound"
+        - "&cto your warp!"
+    Lava_Ambient:
+      Material: LAVA_BUCKET
+      Title: "&3End Portal Spawn"
+      Lore:
+        - "&cClick here to add"
+        - "&can end portal spawning sound"
+        - "&cto your warp!"
+    Block_Fire_Ambient:
+      Material: FIRE_CHARGE
+      Title: "&3Fire Ambient"
+      Lore:
+        - "&cClick here to add"
+        - "&can ambient fire sound"
+        - "&cto your warp!"
+    Block_Portal_Travel:
+      Material: OBSIDIAN
+      Title: "&3Portal Travel"
+      Lore:
+        - "&cClick here to add"
+        - "&ca portal traveling sound"
+        - "&cto your warp!"
+    Block_Portal_Ambient:
+      Material: OBSIDIAN
+      Title: "&3Portal Ambient"
+      Lore:
+        - "&cClick here to add"
+        - "&can ambient portal sound"
+        - "&cto your warp!"
+    Entity_Ender_Eye_Launch:
+      Material: ENDER_EYE
+      Title: "&3Ender Eye Launch"
+      Lore:
+        - "&cClick here to add"
+        - "&can ender eye launch sound"
+        - "&cto your warp!"
+    Entity_Generic_Hurt:
+      Material: DIAMOND_SWORD
+      Title: "&3Generic Hurt"
+      Lore:
+        - "&cClick here to add"
+        - "&ca generic hurt sound"
+        - "&cto your warp!"
+    Entity_Enderman_Teleport:
+      Material: ENDERMAN_SPAWN_EGG
+      Title: "&3Enderman Teleport"
+      Lore:
+        - "&cClick here to add"
+        - "&can enderman teleporting sound"
+        - "&cto your warp!"
+    Entity_Fox_Teleport:
+      Material: FOX_SPAWN_EGG
+      Title: "&3Fox Teleport"
+      Lore:
+        - "&cClick here to add"
+        - "&ca fox teleporting sound"
+        - "&cto your warp!"
+    Entity_Player_Hurt:
+      Material: GOLDEN_SWORD
+      Title: "&3Player Hurt"
+      Lore:
+        - "&cClick here to add"
+        - "&ca generic player hurt sound"
+        - "&cto your warp!"
+
+Death_Particles_Menu:
+  Menu_Title: ""
+  Particles:
+    Ambient_Cave:
+      Material: MINECART
+      Title: "&3Ambient Cave"
+      Lore:
+        - "&cClick here to add"
+        - "&can ambient cave sound"
+        - "&cto your warp!"
+    Block_Anvil_Drop:
+      Material: ANVIL
+      Title: "&3Anvil Drop"
+      Lore:
+        - "&cClick here to add"
+        - "&can anvil drop sound"
+        - "&cto your warp!"
+    Block_Campfire_Crackle:
+      Material: CAMPFIRE
+      Title: "&3Campfire Crackle"
+      Lore:
+        - "&cClick here to add"
+        - "&ca campfire crackling sound"
+        - "&cto your warp!"
+    Block_Chest_Open:
+      Material: CHEST
+      Title: "&3Chest Opening"
+      Lore:
+        - "&cClick here to add"
+        - "&ca chest opening sound"
+        - "&cto your warp!"
+    Block_Glass_Break:
+      Material: GLASS
+      Title: "&3End Gateway Spawn"
+      Lore:
+        - "&cClick here to add"
+        - "&can end gateway spawning sound"
+        - "&cto your warp!"
+    Block_End_Portal_Frame_Fill:
+      Material: END_PORTAL_FRAME
+      Title: "&3End Portal Frame Fill"
+      Lore:
+        - "&cClick here to add"
+        - "&can end portal frame fill sound"
+        - "&cto your warp!"
+    Lava_Ambient:
+      Material: LAVA_BUCKET
+      Title: "&3End Portal Spawn"
+      Lore:
+        - "&cClick here to add"
+        - "&can end portal spawning sound"
+        - "&cto your warp!"
+    Block_Fire_Ambient:
+      Material: FIRE_CHARGE
+      Title: "&3Fire Ambient"
+      Lore:
+        - "&cClick here to add"
+        - "&can ambient fire sound"
+        - "&cto your warp!"
+    Block_Portal_Travel:
+      Material: OBSIDIAN
+      Title: "&3Portal Travel"
+      Lore:
+        - "&cClick here to add"
+        - "&ca portal traveling sound"
+        - "&cto your warp!"
+    Block_Portal_Ambient:
+      Material: OBSIDIAN
+      Title: "&3Portal Ambient"
+      Lore:
+        - "&cClick here to add"
+        - "&can ambient portal sound"
+        - "&cto your warp!"
+    Entity_Ender_Eye_Launch:
+      Material: ENDER_EYE
+      Title: "&3Ender Eye Launch"
+      Lore:
+        - "&cClick here to add"
+        - "&can ender eye launch sound"
+        - "&cto your warp!"
+    Entity_Generic_Hurt:
+      Material: DIAMOND_SWORD
+      Title: "&3Generic Hurt"
+      Lore:
+        - "&cClick here to add"
+        - "&ca generic hurt sound"
+        - "&cto your warp!"
+    Entity_Enderman_Teleport:
+      Material: ENDERMAN_SPAWN_EGG
+      Title: "&3Enderman Teleport"
+      Lore:
+        - "&cClick here to add"
+        - "&can enderman teleporting sound"
+        - "&cto your warp!"
+    Entity_Fox_Teleport:
+      Material: FOX_SPAWN_EGG
+      Title: "&3Fox Teleport"
+      Lore:
+        - "&cClick here to add"
+        - "&ca fox teleporting sound"
+        - "&cto your warp!"
+    Entity_Player_Hurt:
+      Material: GOLDEN_SWORD
+      Title: "&3Player Hurt"
+      Lore:
+        - "&cClick here to add"
+        - "&ca generic player hurt sound"
+        - "&cto your warp!"

@@ -1,0 +1,88 @@
+# -------------------------------------------------------------------------------------------
+#
+#  Welcome to DeathWarden's main configuration file.
+#
+#  Here you'll find of the settings and options that you can
+#  customize to your server needs. Most features are customizable
+#  to an extent.
+#
+# -------------------------------------------------------------------------------------------
+
+# If true, All pvp related deaths will be logged in the log.yml file
+Log_PvP_Deaths: true
+
+# If true, OmegaDeath will keep record of all player deaths and store it in the playerData.yml.
+# Players who have the permission `omegadeath.deathcount` will be able to use the command
+# `/deathcount` to view how many times they have died.
+Death_Counter: true
+
+# If true, OmegaDeath with keep record of all the pvp kills that a player makes and will store it in the playerData.yml
+# Players who have the permission `omegadeath.pvpkills` will be able use the command
+# `/pvpkills` to view how many times they have killed another player.
+PvP_Kill_Counter: true
+
+# If true, a message will sent to all players online when someone dies.
+Death_Messages: true
+
+# If true, A special message will be sent to the player who got killed by another player
+Death_By_Player_Messages: true
+
+# Should players retain their death effect status when they login/logout
+Death_Effects_Login: true
+
+# Should players retain their death effect status when the server restarts
+Death_Effects_Restart: true
+
+# Sets the amount of money that gets taken from the users account when they die.
+# You can use either a percentage or an exact amount to be taken
+Death_Tax:
+  Percentage:
+    # Take a percentage of the players money when they die.
+    Enabled: false
+    # The percentage amount to be taken
+    Amount: 10.00
+  Exact_Amount:
+    # Take an exact amount from the player money when they die.
+    Enabled: true
+    # The exact amount to be taken
+    Amount: 10.00
+
+# Set custom commands that are run when a player dies
+# All the commands will be run through console.
+# Use %player% to get the players name & %killer% to get the player who did the killing
+# This is triggered when a player is killed by another player.
+Death_Commands:
+  Enabled: true
+  Commands:
+    - eco take %player% 10
+
+# This is triggered when a player respawns.
+Respawn_Commands:
+  Enabled: true
+  Commands:
+    - spawn %player%
+
+# This is triggered when a player kills another player.
+Kill_Commands:
+  Enabled: true
+  Commands:
+    - eco give %killer% 10
+    - eco take %player% 10
+
+# This is triggered when the player is killed by anything other than a player
+Death_By_NonPlayer:
+  Enabled: true
+  Commands:
+    - eco take %player% 10
+
+# Which time-format the time stamp in the log.yml will be displayed in
+# Options are: AUS (dd.mm.yyy hh:mm:ss) OR US (mm.dd.yyyy hh:mm:ss) OR CHN (yyyy.mm.dd hh:mm:ss)
+# Defaults to AUS if option is invalid
+Time_Format: AUS
+
+# If set to true, those with the permission deathwarden.update will recieve messages
+# when the plugin updates on spigot
+Update_Notify: true
+
+# DO NOT EDIT THIS!
+Config_Version: 2.0

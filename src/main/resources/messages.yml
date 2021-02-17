@@ -1,0 +1,122 @@
+# -------------------------------------------------------------------------------------------
+#
+#  Welcome to DeathWarden's messages file.
+#
+#  Here you'll find all of the messages that you can
+#  customize to your server needs.
+#
+#  Placeholders:
+#   %player% - The name of the player who died.
+#   %killer% - The name of the player who commited murder.
+#   %weapon% - The murder weapon.
+#   %hearts_remaining% - How much life the killer had left.
+#   %money_taken% - How much money was taken on death
+#   %deathcount% - The amount of times a player has died.
+#
+# -------------------------------------------------------------------------------------------
+
+# Sets the prefix for all the in-game messages.
+# Note: A space is automatically added between prefix and the message.
+Prefix: "#808080&l[#560900DeathWarden#808080&l]"
+
+# Sets the message players receive when they enable deatheffects.
+Death_Effects_Applied: "#00D4FFEnjoy your new cool death effects!"
+
+# Sets the message players receive when they disable deatheffects.
+Death_Effects_Removed: "#00D4FFBack to the old boring deaths."
+
+# Sets the message players get when money gets taken from their account when they die.
+Death_Money: "#00D4FF The amount of $#FF003E%money_taken% #00D4FFhas been taken from your account to pay for the death costs"
+
+# Sets the message players get when their inventory is saved
+Inventory_Saved: "#00D4FFAll your inventory items have been saved!"
+
+# Sets the message players get when their experience is saved
+Experience_Saved: "#00D4FFAll your experience points have been saved!"
+
+# Set the message players get when they return to their death location with the /back command
+Back_On_Death: "#00D4FFYou have returned to your last known death location."
+
+# Sets the message players get when they use the death count command.
+Death_Count:
+  Has_Died: "#00D4FFYou have died #FF003E %deathCount% #00D4FFtimes already!"
+  No_Deaths: "#00D4FFYou have not died yet!"
+
+# Sets the message players get when they use the pvpkills command.
+Pvp_Kill_Counter:
+  Has_Kills: "#00D4FFYou have killed players %pvpkills% times!"
+  No_Kills: "#00D4FFYou have not killed any players!"
+
+PvP_Death_Messages:
+  Killed_By_Player: "#FF003E %killer% #00D4FFhas just killed #FF003E %player% #00D4FFusing #FF003E %weapon% #00D4FFand they only had #FF003E %hearts_remaining% #00D4FFhearts left!"
+
+Death_By:
+  # Customize all the death messages for when hostile mobs kill a player
+  Creatures:
+    Skeleton: "#FF003E%player% #00D4FFjust took an arrow to the knee by a skeleton"
+    Zombie: "#00D4FFClearly #FF003E%player% #00D4FFhas not watched enough zombie movies..."
+    Enderman: "#00D4FFLooking enderman in the eyes is always bad, right #FF003E%player%#00D4FF?"
+    Iron_Golem: "#00D4FFIron Golems always will protect you from people like #FF003E%player%"
+    Bee: "#FF003E%player% #00D4FFdecided to try and get some honey, it didn't work..."
+    Spider: "#FF003E%player% #00D4FFjust tried to become the next spiderman"
+    Cave_Spider: "#FF003E%player% #00D4FFwent into spiderman's cave and never came out..."
+    Pufferfish: "#FF003E%player% #00D4FFjust learnt not to touch puffer fish"
+    Witch: "#FF003E%player% #00D4FFgot killed by the wicked witch of the west"
+    Piglin: "#00D4FFIf you are going to attack piglin #FF003E%player%#00D4FF, expect an army..."
+    Zombified_Piglin: "#00D4FFIf you are going to attack zombie piglin #FF003E%player%#00D4FF, expect an army..."
+    Blaze: "#00D4FFFloating creatures of fire, why mess with them, #FF003E%player%#00D4FF?"
+    Ghast: "#FF003E%player% #00D4FFjust tried to play dodgeball with a ghast and lost"
+    Wither: "#00D4FFMaybe don't take on the wither alone #FF003E%player%"
+    Wither_Skeleton: "#FF003E%player%#00D4FF, these skeletons aren't to be messed with..."
+    Slime: "#00D4FFBig blobs of slime, #FF003E%player% #00D4FFhas just been slimmed"
+    Vex: "#FF003E%player% #00D4FFjust tried to mess with a vex and lost..."
+    Ender_Dragon: "#FF003E%player% #00D4FFdied trying to steal the dragons egg..."
+    Phantom: "#FF003E%player% #00D4FFdidn't keep an eye out for the annoying phantoms"
+    Creeper: "#FF003E%player% #00D4FFdidn't hear the hiss, and went boom"
+    Endermite: "#FF003E #00D4FFLike silverfish, endermites are just as annoying, right %player%?"
+    Guardian: "#FF003E%player% #00D4FFgot caught trespassing on a guardians land. They paid the ultimate price."
+    Elder_Guardian: "#FF003E%player%#00D4FF, just tried trespassing and found themselves at the mercy of an elder guardian"
+    Evoker: "#FF003E%player% #00D4FFneeds to leave the evil evokers alone from now on"
+    Hoglin: "%player%#00D4FF, tried to get some hoglin bacon, it didn't work..."
+    Husk: "#00D4FFHusks are mean, and strong. Right #FF003E%player%?"
+    Magma_Cube: "#00D4FFMagma Slimes, hot and slimy. #FF003E%player% #00D4FFhas been magma slimmed"
+    Polar_Bear: "#00D4FFBest to leave the polar bears alone from now on #FF003E%player%"
+    Ravager: "#00D4FFThe name alone, should've told you not to mess with ravagers, #FF003E%player%"
+    Shulker: "#00D4FFNice try, better luck next time. Shulkers don't die that easily."
+    SilverFish: "#00D4FFSilverFish, are a pest. Keep an eye out next time #FF003E%player%"
+    Pillager: "#FF003E%player%#00D4FF, just tried to pillage a pillager, it didn't go to plan..."
+    Stray: "#00D4FFStay away from the stray, #FF003E%player%"
+    Strider: "#00D4FFBetter to take longer strides to keep away from striders. hey, #FF003E%player%"
+    Vindicator: "#FF003E%player%#00D4FF, just got vindicated by the vindicator"
+    Zoglin: "#00D4FFLike piglin and hoglin, Best to leave these guys alone."
+
+  # Customize all the death messages for when players kill themselves.
+  Environmental:
+    Custom: "#FF003E %player%#00D4FF, just went poof and was dead... No one knows how..."
+    Drowning: "#FF003E %player%#00D4FF, If you're going to go swimming, remember to breath..."
+    Lightning: "#00D4FFI see thor is not happy with %player%..."
+    Fire: "#00D4FFAs #FF003E%player% #00D4FFjust found out. Fire is very hot..."
+    Suffocation: "#00D4FFDon't try breathing through blocks, it doesn't work. Am I right #FF003E%player%#00D4FF?"
+    Fall: "#00D4FFTip: don't try jumping off tall places, or you'll end up like #FF003E%player%"
+    Lava: "#FF003E%player% #00D4FFjust tried swimming in lava, it didn't go so well..."
+    Void: "#00D4FFThere is a reason people stay out of the void #FF003E%player%#00D4FF..."
+    Poison: "#00D4FFPoison.. What a way to go #FF003E%player%#00D4FF..."
+    Magic: "#00D4FFAvada Kedavra! Just like that #FF003E%player% #00D4FFis now dead."
+    Block_Explosion: "#FF003E Block go boom, #FF003E%player% go boom"
+
+# The message received when resetting player data.
+Reset_Player_Data:
+  All_Players: "#00D4FFAll player data has now been reset."
+  One_Player: "#00D4FFThe player data for #FF003E%player% #00D4FFhas been reset!"
+
+# The message received when resetting the total deaths log.
+Reset_Total_Deaths_Log: "#00D4FFTotal Deaths Log has now been reset."
+
+# Sets the message the player is sent when they reload the plugin
+Reload_Message: "#560900DeathWarden #00D4FFhas successfully been reloaded"
+
+# Sets the message players receive when they don't have permission
+No_Permission: "#FF003E Sorry, you sadly don't have the required permission for that!"
+
+# DO NOT EDIT THIS!
+Config_Version: 2.0

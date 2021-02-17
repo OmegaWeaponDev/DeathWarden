@@ -1,0 +1,120 @@
+name: ${project.name}
+version: ${project.version}
+api-version: ${pl.apiver}
+description: ${project.description}
+main: ${main.class}
+
+author: ${pl.author}
+
+softdepend:
+  - Vault
+  - PlaceholderAPI
+
+commands:
+  deathwarden:
+    description: The main command for DeathWarden
+    aliases: [dw]
+  back:
+    description: The back on death command
+  deatheffects:
+    description: The toggle command for all the death effects
+    aliases: [de, deffects, deathe]
+  deathcount:
+    description: The death count command
+    aliases: [dcount, deathc]
+  deathwardenreset:
+    description: The reset player data command
+    aliases: [dwreset]
+  totaldeathsreset:
+    description: The reset total deaths log command
+    aliases: [tdreset, resettd]
+  dwdebug:
+    description: The debug command for DeathWarden
+    aliases: [deathwardendebug]
+
+permissions:
+  deathwarden.admin:
+    description: Grants the user access to all the commands and features
+    default: false
+    children:
+      - deathwarden.reload
+      - deathwarden.update
+      - deathwarden.deatheffects
+      - deathwarden.deatheffects.edit
+      - deathwarden.deatheffects.login
+      - deathwarden.back
+      - deathwarden.keepxp
+      - deathwarden.debug
+      - deathwarden.keepinv
+      - deathwarden.deathcount
+      - deathwarden.rewards.exempt
+      - deathwarden.commands.admin
+      - deathwarden.commands.deathbynonplayer.exempt
+      - deathwarden.reset.all
+      - deathwarden.reset.player
+      - deathwarden.resettotaldeaths
+    deathwarden.commands.admin:
+      description: Makes the user exempt to all the different death commands.
+      default: false
+      children:
+        - deathwarden.commands.kill.exempt
+        - deathwarden.commands.death.exempt
+        - deathwarden.commands.rewards.exempt
+        - deathwarden.commands.deathbynonplayer.exempt
+  deathwarden.reload:
+    description: Grants the user access to the reload command
+    default: false
+  deathwarden.update:
+    description: Allows the user to recieve plugin update message in-game
+    default: false
+  deathwarden.deatheffects:
+    description: Grants the user access to the toggle command
+    default: false
+  deathwarden.deatheffects.edit:
+    description: Allows the user to open the death effects menu
+    default: false
+  deathwarden.deatheffects.login:
+    description: Allows the user to keep thier death effects when login/logout
+    default: false
+  deathwarden.back:
+    description: Grants the user access to the back command
+    default: false
+  deathwarden.keepxp:
+    description: Allows the user to keep xp on death
+    default: false
+  deathwarden.keepinv:
+    description: Allows the user to keep all thier items on death
+    default: false
+  deathwarden.deathcount:
+    description: Grants the user access to the deathcount view command
+    default: false
+  deathwarden.debug:
+    description: Grants the user access to the debug command
+    default: false
+  deathwarden.rewards.exempt:
+    description: Allows the user to bypass the rewards for killing something
+    default: false
+  deathwarden.commands.death.exempt:
+    description: Bypass permission for the commands on death
+    default: false
+  deathwarden.commands.respawn.exempt:
+    description: Bypass permission for the commands on respawn
+    default: false
+  deathwarden.commands.kill.exempt:
+    description: Bypass permission for the commands on kill
+    default: false
+  deathwarden.commands.deathbynonplayer.exempt:
+    description: Bypass permission for the commands on death by non players
+    default: false
+  deathwarden.rewards.limit:
+    description: Gives the user the reward limits
+    default: false
+  deathwarden.reset.all:
+    description: Allows the user to reset all player data
+    default: false
+  deathwarden.reset.player:
+    description: Allows the user to reset a players data
+    default: false
+  deathwarden.resettotaldeaths:
+    description: Allows the user to reset the total deaths log
+    default: false

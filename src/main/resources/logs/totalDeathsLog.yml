@@ -1,0 +1,78 @@
+# -------------------------------------------------------------------------------------------
+#
+#  Welcome to DeathWarden's total kills log file.
+#
+#  This file contains the lists of all the total kills.
+#  It will include all friendly and hostile mobs killed.
+#  It allows for easy overall total statistics.
+#
+# -------------------------------------------------------------------------------------------
+
+Creatures_Killed:
+  Bat: 0
+  Bee: 0
+  Blaze: 0
+  Cat: 0
+  Cave_Spider: 0
+  Chicken: 0
+  Cod: 0
+  Cow: 0
+  Creeper: 0
+  Dolphin: 0
+  Donkey: 0
+  Drowned: 0
+  Elder_Guardian: 0
+  Ender_Dragon: 0
+  Enderman: 0
+  Endermite: 0
+  Evoker: 0
+  Fox: 0
+  Ghast: 0
+  Giant: 0
+  Guardian: 0
+  Hoglin: 0
+  Horse: 0
+  Husk: 0
+  Illusioner: 0
+  Iron_Golem: 0
+  Llama: 0
+  Magma_Cube: 0
+  Mule: 0
+  Mushroom_Cow: 0
+  Ocelot: 0
+  Panda: 0
+  Parrot: 0
+  Phantom: 0
+  Pig: 0
+  Piglin: 0
+  Piglin_Brute: 0
+  Pillager: 0
+  Polar_Bear: 0
+  Pufferfish: 0
+  Rabbit: 0
+  Ravager: 0
+  Salom: 0
+  Sheep: 0
+  Shulker: 0
+  Silverfish: 0
+  Skeleton: 0
+  Slime: 0
+  Snowman: 0
+  Spider: 0
+  Squid: 0
+  Stray: 0
+  Strider: 0
+  Tropical_Fish: 0
+  Turtle: 0
+  Vex: 0
+  Villager: 0
+  Vindicator: 0
+  Wandering_Trader: 0
+  Witch: 0
+  Wither: 0
+  Wither_Skeleton: 0
+  Wolf: 0
+  Zoglin: 0
+  Zombie: 0
+  Zombie_Villager: 0
+  Zombified_Piglin: 0

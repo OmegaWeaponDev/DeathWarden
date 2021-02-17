@@ -1,0 +1,656 @@
+# -------------------------------------------------------------------------------------------
+#
+#  Welcome to DeathWarden's rewards file.
+#
+#  Here you'll find of the settings and options that you can
+#  customize to your server needs make your rewards amazing.
+#
+# -------------------------------------------------------------------------------------------
+
+# Whether or not you want to enable rewards for killing monsters.
+Kill_Rewards: true
+
+# Limit how many rewards can be given to a player in a certain amount of time
+Reward_Limits:
+  # Whether or not you're wanting to use the limits
+  Enabled: false
+  # The limit amount
+  Limit_Amount: 5
+  # The amount of time in minutes
+  Limit_Cooldown: 1
+  # The reset message for the limits
+  Limit_Reset: "#00D4FFYour rewards limit has been reset."
+
+# Here you can configure the rewards that players will get when they kill something
+Rewards:
+  Creatures:
+    Skeleton:
+      # Whether or not you're wanting a reward enabled for this creature
+      Enabled: true
+      # The rewards that will be given to the user
+      Rewards:
+        # If you want OmegaDeath to give the player a random amount of money
+        Money:
+          Enabled: true
+          # The maximum amount of money a player could get
+          Max: 100
+          # The minimum amount of money a player could get
+          Min: 10
+          # The message to inform players they got some money
+        Command_Rewards:
+          # Whether or not you're wanting to give players rewards other than money
+          Enabled: true
+          # All commands here will be run by console.
+          # Use %player% to get the players name.
+          Commands:
+            - give %player% apple 1
+        # Special message for killing that mob.
+        Reward_Message:
+          # Whether or not killing this mob should give the player a special message.
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Zombie:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Enderman:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Iron_Golem:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Bee:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Spider:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Cave_Spider:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Pufferfish:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Witch:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Piglin:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Zombified_Piglin:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Blaze:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Ghast:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Wither:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Wither_Skeleton:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Slime:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Vex:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Ender_Dragon:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Phantom:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Creeper:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Endermite:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Guardian:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Elder_Guardian:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Evoker:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Hoglin:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Husk:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Magma_Cube:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Polar_Bear:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Ravager:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Shulker:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    SilverFish:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Pillager:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Stray:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Strider:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Vindicator:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Zoglin:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Pig:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Panda:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Cow:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Mushroom_Cow:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Villager:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Fox:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Bat:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+    Sheep:
+      Enabled: true
+      Rewards:
+        Money:
+          Enabled: true
+          Max: 100
+          Min: 10
+        Command_Rewards:
+          Enabled: true
+          Commands:
+            - give %player% apple 1
+        Reward_Message:
+          Enabled: true
+          Message: "#00D4FFEnjoy all these amazing rewards for that awesome kill."
+
+# DO NOT EDIT THIS!
+Config_Version: 2.0
