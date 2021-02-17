@@ -1,7 +1,6 @@
 package me.omegaweapondev.deathwarden.commands;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
-import me.omegaweapondev.deathwarden.events.PlayerListener;
 import me.omegaweapondev.deathwarden.menus.DeathEffectsMenu;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.omegaweapondev.deathwarden.utils.StorageManager;
@@ -39,7 +38,7 @@ public class DeathEffectsCommand extends PlayerCommand {
       if(storageManager.getUserBoolean("Death_Effects.Enabled")) {
         storageManager.setUserBoolean("Death_Effects.Enabled", false);
         if(configFile.getBoolean("Death_Effects_Login") && Utilities.checkPermissions(player, false, "deathwarden.deatheffects.login", "deathwarden.admin")) {
-          PlayerListener.getDeathEffectsMap().put(player.getUniqueId(), false);
+          storageManager.getDeathEffectsMap().put(player.getUniqueId(), false);
         }
         Utilities.message(player, messageHandler.string("Death_Effects_Removed", "#00D4FFBack to the old boring deaths."));
         return;
@@ -47,7 +46,7 @@ public class DeathEffectsCommand extends PlayerCommand {
 
       storageManager.setUserBoolean("Death_Effects.Enabled", true);
       if(configFile.getBoolean("Death_Effects_Login") && Utilities.checkPermissions(player, false, "deathwarden.deatheffects.login", "deathwarden.admin")) {
-        PlayerListener.getDeathEffectsMap().put(player.getUniqueId(), true);
+        storageManager.getDeathEffectsMap().put(player.getUniqueId(), true);
       }
       Utilities.message(player, messageHandler.string("Death_Effects_Applied", "#00D4FFEnjoy your new cool death effects!"));
       return;

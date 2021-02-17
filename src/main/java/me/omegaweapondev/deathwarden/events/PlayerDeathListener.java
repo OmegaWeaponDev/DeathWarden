@@ -130,7 +130,7 @@ public class PlayerDeathListener implements Listener {
       return;
     }
 
-    if(!PlayerListener.getDeathEffectsMap().get(player.getUniqueId())) {
+    if(!storageManager.getDeathEffectsMap().get(player.getUniqueId())) {
       return;
     }
 

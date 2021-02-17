@@ -57,7 +57,7 @@ public class DeathWarden extends JavaPlugin {
       deathEffectsMenu.deleteInventory();
     }
 
-    PlayerListener.getDeathEffectsMap().clear();
+    storageManager.getDeathEffectsMap().clear();
     storageManager.getDeathLocation().clear();
     storageManager.getPenaltyMap().clear();
 
@@ -174,9 +174,13 @@ public class DeathWarden extends JavaPlugin {
     for(Player player : Bukkit.getOnlinePlayers()) {
       if(Utilities.checkPermissions(player, true, "deathwarden.deatheffects", "deathwarden.admin")) {
         StorageManager playerData = new StorageManager(plugin, player, player.getUniqueId());
-        PlayerListener.getDeathEffectsMap().put(player.getUniqueId(), playerData.getUserBoolean("Death_Effects.Enabled"));
+        storageManager.getDeathEffectsMap().put(player.getUniqueId(), playerData.getUserBoolean("Death_Effects.Enabled"));
       }
     }
+  }
+
+  public Economy getEconomy() {
+    return econ;
   }
 
   public StorageManager getStorageManager() {

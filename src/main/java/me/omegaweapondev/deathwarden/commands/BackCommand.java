@@ -1,7 +1,6 @@
 package me.omegaweapondev.deathwarden.commands;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
-import me.omegaweapondev.deathwarden.events.PlayerDeathListener;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.omegaweapondev.deathwarden.utils.StorageManager;
 import me.ou.library.Utilities;
@@ -28,12 +27,12 @@ public class BackCommand extends PlayerCommand {
       return;
     }
 
-    if(PlayerDeathListener.getDeathLocation().get(player.getUniqueId()) == null) {
+    if(storageManager.getDeathLocation().get(player.getUniqueId()) == null) {
       return;
     }
 
-    player.teleport(PlayerDeathListener.getDeathLocation().get(player.getUniqueId()));
-    PlayerDeathListener.getDeathLocation().remove(player.getUniqueId());
+    player.teleport(storageManager.getDeathLocation().get(player.getUniqueId()));
+    storageManager.getDeathLocation().remove(player.getUniqueId());
     Utilities.message(player, "Back_On_Death", "#00D4FFYou have returned to your last known death location.");
   }
 }
