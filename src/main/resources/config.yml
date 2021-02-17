@@ -6,6 +6,8 @@
 #  customize to your server needs. Most features are customizable
 #  to an extent.
 #
+#  You can find all the potion effects here: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+#
 # -------------------------------------------------------------------------------------------
 
 # If true, All pvp related deaths will be logged in the log.yml file
@@ -32,6 +34,25 @@ Death_Effects_Login: true
 
 # Should players retain their death effect status when the server restarts
 Death_Effects_Restart: true
+
+# Whether the player should be penalised for not having the money to pay when they die
+Death_Penalty: true
+
+# Sets a potion effect the player recieves when they don't have enough money
+# Requires Death_Penalty to be set to true
+Death_Penalty_Effect:
+  # The potion effects to apply
+  # The Timer is in seconds
+  Potion_Effect:
+    WEAKNESS:
+      Amplifier: 1
+      Timer: 10
+    CONFUSION:
+      Amplifier: 1
+      Timer: 10
+    SLOW:
+      Amplifier: 1
+      Timer: 10
 
 # Sets the amount of money that gets taken from the users account when they die.
 # You can use either a percentage or an exact amount to be taken
