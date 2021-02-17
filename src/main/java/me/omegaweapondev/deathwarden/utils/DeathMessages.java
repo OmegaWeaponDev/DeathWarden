@@ -15,9 +15,9 @@ public class DeathMessages {
   private final FileConfiguration configFile;
   private final Player player;
   private final Player killer;
-  private final EntityDamageByEntityEvent damageByEntityEvent;
+  private final EntityDamageEvent damageByEntityEvent;
 
-  public DeathMessages(final DeathWarden plugin, final Player player, @Nullable final Player killer, @Nullable final EntityDamageByEntityEvent damageByEntityEvent) {
+  public DeathMessages(final DeathWarden plugin, final Player player, @Nullable final Player killer, @Nullable final EntityDamageEvent damageByEntityEvent) {
     this.plugin = plugin;
     this.player = player;
     this.damageByEntityEvent = damageByEntityEvent;
@@ -123,8 +123,8 @@ public class DeathMessages {
     }
 
     for(String deathCause : messageHandler.configSection("Death_By.Environmental").getKeys(false)) {
-      if(player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.valueOf(deathCause)) {
-        Utilities.broadcast(messageHandler.string("Death_By.Creatures." + deathCause, "#ff4a4aYou were killed by " + deathCause).replace("%player%", player.getDisplayName()));
+      if(player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.valueOf(deathCause.toUpperCase())) {
+        Utilities.broadcast(messageHandler.string("Death_By.Environmental." + deathCause, "#ff4a4aYou were killed by " + deathCause).replace("%player%", player.getDisplayName()));
         return;
       }
     }
@@ -138,14 +138,13 @@ public class DeathMessages {
     if(configFile.getBoolean("Death_By_Player_Messages")) {
       String weapon;
 
-      if(killer.getInventory().getItemInMainHand() == null) {
-        weapon = "Punched";
+      if(killer.getInventory().getItemInMainHand().getType().isAir()) {
+        weapon = "their own fists";
       } else {
         weapon = (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name();
       }
 
-
-      Utilities.broadcast(messageHandler.string("PvP_Death_Messages.Killed_By_Player", "&c%killer% &bhas just killed &c%player% &busing &c%weapon% &band they only had &c%hearts_remaining% &bhearts left!")
+      Utilities.broadcast(messageHandler.string("PvP_Death_Messages.Killed_By_Player", "#ff4a4a%killer% &bhas just killed #ff4a4a%player% &busing #ff4a4a%weapon% &band they only had #ff4a4a%hearts_remaining% &bhearts left!")
         .replace("%player%", player.getName())
         .replace("%killer%", killer.getName())
         .replace("%weapon%", weapon)

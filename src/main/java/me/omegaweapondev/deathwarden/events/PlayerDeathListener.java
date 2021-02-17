@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffectType;
@@ -91,11 +90,7 @@ public class PlayerDeathListener implements Listener {
       deathCommands = new DeathCommands(plugin, player, null);
       deathCommands.deathByNonPlayer();
 
-      if(!(player.getLastDamageCause() instanceof EntityDamageByEntityEvent)) {
-        return;
-      }
-
-      deathMessages = new DeathMessages(plugin, player, null, (EntityDamageByEntityEvent) player.getLastDamageCause());
+      deathMessages = new DeathMessages(plugin, player, null,  player.getLastDamageCause());
       deathMessages.deathByCreatures();
     }
   }
@@ -143,6 +138,7 @@ public class PlayerDeathListener implements Listener {
 
   private void keepExperience ( final PlayerDeathEvent playerDeathEvent, final Player player){
     playerDeathEvent.setKeepLevel(true);
+    playerDeathEvent.setDroppedExp(0);
     Utilities.message(player, messageHandler.string("Experience_Saved", "#00D4FFAll your experience points have been saved!"));
   }
 
@@ -177,7 +173,7 @@ public class PlayerDeathListener implements Listener {
     }
 
     // Player Stats
-    pvpLog.createSection(playerTime);
+    pvpLog.createSection("Pvp_Kills." + playerTime);
     pvpLog.set(playerTime + ".Player Killed", player.getName());
     pvpLog.set(playerTime + ".Killed By", killer.getName());
     pvpLog.set(playerTime + ".Killer Is Op", killer.isOp());
@@ -185,13 +181,20 @@ public class PlayerDeathListener implements Listener {
     pvpLog.set(playerTime + ".Killers Gamemode", killer.getGameMode().name());
 
     // Weapon Stats
-    pvpLog.createSection(playerTime + ".Weapon");
-    pvpLog.set(playerTime + ".Weapon" + ".Item", killer.getInventory().getItemInMainHand().getType().name());
-    pvpLog.set(playerTime + ".Weapon" + ".Name", (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name());
-    pvpLog.set(playerTime + ".Weapon" + ".Enchants", killer.getInventory().getItemInMainHand().getItemMeta().hasEnchants());
+    pvpLog.createSection("Pvp_Kills." + playerTime + ".Weapon");
+
+    if(killer.getInventory().getItemInMainHand().getType().isAir()) {
+      pvpLog.set(playerTime + ".Weapon" + ".Item", "Fists");
+      pvpLog.set(playerTime + ".Weapon" + ".Name", killer.getName() + "'s Fists");
+      pvpLog.set(playerTime + ".Weapon" + ".Enchants", "None");
+    } else {
+      pvpLog.set(playerTime + ".Weapon" + ".Item", killer.getInventory().getItemInMainHand().getType().name());
+      pvpLog.set(playerTime + ".Weapon" + ".Name", (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name());
+      pvpLog.set(playerTime + ".Weapon" + ".Enchants", killer.getInventory().getItemInMainHand().getItemMeta().hasEnchants());
+    }
 
     // Death Location
-    pvpLog.createSection(playerTime + ".Location");
+    pvpLog.createSection("Pvp_Kills." + playerTime + ".Location");
     pvpLog.set(playerTime + ".Location" + ".World", world);
     pvpLog.set(playerTime + ".Location" + ".X", player.getLocation().getBlockX());
     pvpLog.set(playerTime + ".Location" + ".Y", player.getLocation().getBlockY());
@@ -202,11 +205,11 @@ public class PlayerDeathListener implements Listener {
   }
 
   private void withdrawDeathMoney(final Player player) {
-    final double percentageAmount = configFile.getDouble("Death_Money.Percentage.Amount");
-    final double configAmount = configFile.getDouble("Death_Money.Exact_Amount.Amount");
+    final double percentageAmount = configFile.getDouble("Death_Tax.Percentage.Amount");
+    final double configAmount = configFile.getDouble("Death_Tax.Exact_Amount.Amount");
     final double playerBalance = plugin.getEconomy().getBalance(player);
 
-    if(!configFile.getBoolean("Death_Money.Percentage.Enabled")) {
+    if(!configFile.getBoolean("Death_Tax.Percentage.Enabled")) {
 
       if(!(plugin.getEconomy().getBalance(player) >= configAmount)) {
         Utilities.message(player, messageHandler.string("Death_Penalty", "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"));
