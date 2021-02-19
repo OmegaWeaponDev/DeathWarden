@@ -1,10 +1,7 @@
 package me.omegaweapondev.deathwarden;
 
 import me.omegaweapondev.deathwarden.commands.*;
-import me.omegaweapondev.deathwarden.events.MenuListener;
-import me.omegaweapondev.deathwarden.events.PlayerDeathListener;
-import me.omegaweapondev.deathwarden.events.PlayerListener;
-import me.omegaweapondev.deathwarden.events.RewardsListener;
+import me.omegaweapondev.deathwarden.events.*;
 import me.omegaweapondev.deathwarden.menus.DeathEffectsMenu;
 import me.omegaweapondev.deathwarden.menus.ParticleMenu;
 import me.omegaweapondev.deathwarden.menus.SoundMenu;
@@ -129,7 +126,7 @@ public class DeathWarden extends JavaPlugin {
 
   private void setupEvents() {
     // Register the events
-    Utilities.registerEvents(new PlayerListener(plugin), new PlayerDeathListener(plugin), new RewardsListener(plugin), new MenuListener()) ;
+    Utilities.registerEvents(new PlayerListener(plugin), new PlayerDeathListener(plugin), new RewardsListener(plugin), new MenuListener(), new EntityDeathListener(plugin)) ;
   }
 
   private boolean setupEconomy() {

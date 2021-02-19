@@ -54,7 +54,7 @@ public class CreaturesKilledUtil {
     creatures.add("Pufferfish");
     creatures.add("Rabbit");
     creatures.add("Ravager");
-    creatures.add("Salom");
+    creatures.add("Salmon");
     creatures.add("Sheep");
     creatures.add("Shulker");
     creatures.add("Silverfish");

@@ -8,10 +8,8 @@ import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class SoundMenu extends MenuCreator {
@@ -32,33 +30,33 @@ public class SoundMenu extends MenuCreator {
     messageHandler = new MessageHandler(plugin, storageManager.getMessagesFile().getConfig());
     deathEffectsConfig = storageManager.getDeathEffectMenus().getConfig();
 
-    int slot = -2;
+//    int slot = -2;
 
-    Utilities.logInfo(true, "Death Sounds: " + deathEffectsConfig.getConfigurationSection("Death_Sounds_Menu.Sounds").getKeys(false).size());
+    Utilities.logInfo(true, "Death Sounds: " + storageManager.getDeathEffectMenus().getConfig().getString("Death_Sounds_Menu.Menu_Title"));
 
-    for(String itemName : deathEffectsConfig.getConfigurationSection("Death_Sounds_Menu.Sounds").getKeys(false)) {
-
-      if (slot++ > 33) {
-        Utilities.logWarning(true, "You can only have 33 sounds in the Sounds Menu!");
-        return;
-      }
-
-      setItem(slot + 1, createItem(deathEffectsConfig.getString("Death_Sounds_Menu.Sounds." + itemName)), player -> {
-        storageManager = new StorageManager(plugin, player, player.getUniqueId());
-
-        storageManager.setUserString("Death_Effects.Death_Sounds", itemName.toUpperCase());
-        storageManager.savePlayerData();
-      });
-    }
-
-    setItem(35, createItemStack("BARRIER", Utilities.colourise("#570000Close"), Utilities.colourise(Arrays.asList("#ff4a4aClick here to close", "#ff4a4athe name colour gui"))), HumanEntity::closeInventory);
-
-    setItem(34, createItemStack("OAK_DOOR", Utilities.colourise("#570000Return"), Utilities.colourise(Arrays.asList("#ff4a4aClick here to return", "#ff4a4ato the previous menu"))), player -> {
-      player.closeInventory();
-
-      deathEffectsMenu = new DeathEffectsMenu(plugin, 3, deathEffectsConfig.getString("Death_Effects_Menu.Menu_Title"), "#00D4FFDeath Effects Menu");
-      deathEffectsMenu.openInventory(player);
-    });
+//    for(String itemName : deathEffectsConfig.getConfigurationSection("Death_Sounds_Menu.Sounds").getKeys(false)) {
+//
+//      if (slot++ > 33) {
+//        Utilities.logWarning(true, "You can only have 33 sounds in the Sounds Menu!");
+//        return;
+//      }
+//
+//      setItem(slot + 1, createItem(deathEffectsConfig.getString("Death_Sounds_Menu.Sounds." + itemName)), player -> {
+//        storageManager = new StorageManager(plugin, player, player.getUniqueId());
+//
+//        storageManager.setUserString("Death_Effects.Death_Sounds", itemName.toUpperCase());
+//        storageManager.savePlayerData();
+//      });
+//    }
+//
+//    setItem(35, createItemStack("BARRIER", Utilities.colourise("#570000Close"), Utilities.colourise(Arrays.asList("#ff4a4aClick here to close", "#ff4a4athe name colour gui"))), HumanEntity::closeInventory);
+//
+//    setItem(34, createItemStack("OAK_DOOR", Utilities.colourise("#570000Return"), Utilities.colourise(Arrays.asList("#ff4a4aClick here to return", "#ff4a4ato the previous menu"))), player -> {
+//      player.closeInventory();
+//
+//      deathEffectsMenu = new DeathEffectsMenu(plugin, 3, deathEffectsConfig.getString("Death_Effects_Menu.Menu_Title"), "#00D4FFDeath Effects Menu");
+//      deathEffectsMenu.openInventory(player);
+//    });
   }
 
   private ItemStack createItem(final String deathEffectItem) {
