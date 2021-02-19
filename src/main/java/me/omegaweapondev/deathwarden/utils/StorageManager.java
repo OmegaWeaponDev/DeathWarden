@@ -16,19 +16,21 @@ import java.util.*;
 public class StorageManager {
   private final DeathWarden plugin;
 
-  private final ConfigCreator configFile;
-  private final ConfigCreator messagesFile;
-  private final ConfigCreator pvpLog;
-  private final ConfigCreator totalDeathsLog;
-  private final ConfigCreator deathEffectMenus;
+  private final ConfigCreator configFile = new ConfigCreator("config.yml");
+  private final ConfigCreator messagesFile = new ConfigCreator("messages.yml");
+  private final ConfigCreator pvpLog = new ConfigCreator("logs" + File.separator + "pvpKills.yml");
+  private final ConfigCreator totalDeathsLog = new ConfigCreator("logs" + File.separator + "totalDeathsLog.yml");
+  private final ConfigCreator deathEffectMenus = new ConfigCreator("deathEffectMenus.yml");
+  private final Map<UUID, Location> deathLocationMap = new HashMap<>();
+  private final Map<UUID, Boolean> penaltyMap = new HashMap<>();
+  private final Map<UUID, Boolean> deathEffectsMap = new HashMap<>();
+
   private final File tempUserFile;
   private final File userFile;
   private final FileConfiguration userData;
   private final Player player;
   private final UUID playerUUID;
-  private final Map<UUID, Location> deathLocationMap;
-  private final Map<UUID, Boolean> penaltyMap;
-  private final Map<UUID, Boolean> deathEffectsMap;
+
 
   private CreaturesKilledUtil creaturesKilledUtil;
 
@@ -36,15 +38,6 @@ public class StorageManager {
     this.plugin = plugin;
     player = null;
     playerUUID = null;
-
-    configFile = new ConfigCreator("config.yml");
-    messagesFile = new ConfigCreator("messages.yml");
-    pvpLog = new ConfigCreator("logs" + File.separator + "pvpKills.yml");
-    totalDeathsLog = new ConfigCreator("logs" + File.separator + "totalDeathsLog.yml");
-    deathEffectMenus = new ConfigCreator("deathEffectMenus.yml");
-    deathLocationMap = new HashMap<>();
-    penaltyMap = new HashMap<>();
-    deathEffectsMap = new HashMap<>();
 
     creaturesKilledUtil = new CreaturesKilledUtil();
     tempUserFile = new File(plugin.getDataFolder() + File.separator + "userData", "tempUserFile.yml");
@@ -57,15 +50,6 @@ public class StorageManager {
     this.plugin = plugin;
     this.player = player;
     this.playerUUID = playerUUID;
-
-    configFile = new ConfigCreator("config.yml");
-    messagesFile = new ConfigCreator("messages.yml");
-    pvpLog = new ConfigCreator("logs" + File.separator + "pvpKills.yml");
-    totalDeathsLog = new ConfigCreator("logs" + File.separator + "totalDeathsLog.yml");
-    deathEffectMenus = new ConfigCreator("deathEffectMenus.yml");
-    deathLocationMap = new HashMap<>();
-    penaltyMap = new HashMap<>();
-    deathEffectsMap = new HashMap<>();
 
     creaturesKilledUtil = new CreaturesKilledUtil();
     tempUserFile = new File(plugin.getDataFolder() + File.separator + "userData", "tempUserFile.yml");

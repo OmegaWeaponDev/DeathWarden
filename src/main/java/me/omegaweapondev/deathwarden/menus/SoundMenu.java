@@ -14,7 +14,6 @@ import java.util.List;
 
 public class SoundMenu extends MenuCreator {
   private final DeathWarden plugin;
-  private final FileConfiguration configFile;
   private final FileConfiguration deathEffectsConfig;
   private final MessageHandler messageHandler;
 
@@ -26,13 +25,14 @@ public class SoundMenu extends MenuCreator {
     super(inventoryRows, inventoryName, defaultInventoryName);
     this.plugin = plugin;
     storageManager = new StorageManager(plugin);
-    configFile = storageManager.getConfigFile().getConfig();
     messageHandler = new MessageHandler(plugin, storageManager.getMessagesFile().getConfig());
     deathEffectsConfig = storageManager.getDeathEffectMenus().getConfig();
 
 //    int slot = -2;
 
-    Utilities.logInfo(true, "Death Sounds: " + storageManager.getDeathEffectMenus().getConfig().getString("Death_Sounds_Menu.Menu_Title"));
+    Utilities.logInfo(true, storageManager.getDeathEffectMenus().getFileName());
+    Utilities.logInfo(true, "Death Effects: " + deathEffectsConfig.getString("Death_Effects_Menu.Menu_Title"));
+    Utilities.logInfo(true, "Death Sounds: " + deathEffectsConfig.getString("Death_Sounds_Menu.Menu_Title"));
 
 //    for(String itemName : deathEffectsConfig.getConfigurationSection("Death_Sounds_Menu.Sounds").getKeys(false)) {
 //
