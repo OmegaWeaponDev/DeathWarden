@@ -19,8 +19,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.UUID;
-
 public class DeathWarden extends JavaPlugin {
   private DeathWarden plugin;
   private SettingsHandler settingsHandler;
@@ -120,6 +118,7 @@ public class DeathWarden extends JavaPlugin {
     Utilities.setCommand().put("deathwardenreset", new ResetPlayerCommand(plugin));
     Utilities.setCommand().put("totaldeathsreset", new ResetTotalDeathsLogCommand(plugin));
     Utilities.setCommand().put("dwdebug", new DebugCommand(plugin));
+    Utilities.setCommand().put("resetpvpkills", new ResetPvpKillsCommand(plugin));
 
     Utilities.registerCommands();
     Utilities.logInfo(true, "Commands Registered: " + Utilities.setCommand().size());
@@ -179,7 +178,8 @@ public class DeathWarden extends JavaPlugin {
 
     for(Player player : Bukkit.getOnlinePlayers()) {
       if(Utilities.checkPermissions(player, true, "deathwarden.deatheffects", "deathwarden.admin")) {
-        getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), getUserData(player, player.getUniqueId()).getPlayerData().getBoolean("Death_Effects.Enabled"));
+        userData = new UserDataHandler(plugin, player, player.getUniqueId());
+        getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), userData.getPlayerData().getBoolean("Death_Effects.Enabled"));
       }
     }
   }
@@ -190,10 +190,5 @@ public class DeathWarden extends JavaPlugin {
 
   public SettingsHandler getSettingsHandler() {
     return settingsHandler;
-  }
-
-  public UserDataHandler getUserData(Player player, UUID playerUUID) {
-    userData = new UserDataHandler(plugin, player, playerUUID);
-    return userData;
   }
 }

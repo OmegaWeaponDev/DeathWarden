@@ -31,6 +31,9 @@ commands:
   dwdebug:
     description: The debug command for DeathWarden
     aliases: [deathwardendebug]
+  resetpvpkills:
+    description: The reset pvpkills command
+    aliases: [pkreset, resetpk]
 
 permissions:
   deathwarden.admin:
@@ -40,10 +43,7 @@ permissions:
       - deathwarden.reload
       - deathwarden.update
       - deathwarden.deatheffects
-      - deathwarden.deatheffects.edit
-      - deathwarden.deatheffects.login
-      - deathwarden.deatheffects.sound
-      - deathwarden.deatheffects.particle
+      - deathwarden.deatheffects.admin
       - deathwarden.back
       - deathwarden.keepxp
       - deathwarden.debug
@@ -52,17 +52,26 @@ permissions:
       - deathwarden.rewards.exempt
       - deathwarden.commands.admin
       - deathwarden.commands.deathbynonplayer.exempt
-      - deathwarden.reset.all
       - deathwarden.reset.player
       - deathwarden.resettotaldeaths
-    deathwarden.commands.admin:
-      description: Makes the user exempt to all the different death commands.
-      default: false
-      children:
-        - deathwarden.commands.kill.exempt
-        - deathwarden.commands.death.exempt
-        - deathwarden.commands.rewards.exempt
-        - deathwarden.commands.deathbynonplayer.exempt
+      - deathwarden.reset.pvpkills
+  deathwarden.commands.admin:
+    description: Makes the user exempt to all the different death commands.
+    default: false
+    children:
+      - deathwarden.commands.kill.exempt
+      - deathwarden.commands.death.exempt
+      - deathwarden.commands.rewards.exempt
+      - deathwarden.commands.deathbynonplayer.exempt
+  deathwarden.deatheffects.admin:
+    description: Gives the user all the deatheffect permissions
+    default: false
+    children:
+      - deathwarden.deatheffects
+      - deathwarden.deatheffects.edit
+      - deathwarden.deatheffects.sound
+      - deathwarden.deatheffects.login
+      - deathwarden.deatheffects.particle
   deathwarden.reload:
     description: Grants the user access to the reload command
     default: false
@@ -117,12 +126,12 @@ permissions:
   deathwarden.rewards.limit:
     description: Gives the user the reward limits
     default: false
-  deathwarden.reset.all:
-    description: Allows the user to reset all player data
-    default: false
   deathwarden.reset.player:
     description: Allows the user to reset a players data
     default: false
   deathwarden.resettotaldeaths:
     description: Allows the user to reset the total deaths log
+    default: false
+  deathwarden.reset.pvpkills:
+    description: Allows the user to reset the pvpkills logs
     default: false

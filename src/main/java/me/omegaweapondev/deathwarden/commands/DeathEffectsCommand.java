@@ -3,6 +3,7 @@ package me.omegaweapondev.deathwarden.commands;
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.menus.DeathEffectsMenu;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
+import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.Utilities;
 import me.ou.library.commands.PlayerCommand;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,7 +15,7 @@ public class DeathEffectsCommand extends PlayerCommand {
   private final FileConfiguration deathEffectsConfig;
   private final FileConfiguration configFile;
 
-  private FileConfiguration userData;
+  private UserDataHandler userData;
   private DeathEffectsMenu deathEffectsMenu;
 
   public DeathEffectsCommand(final DeathWarden plugin) {
@@ -26,7 +27,7 @@ public class DeathEffectsCommand extends PlayerCommand {
 
   @Override
   protected void execute(Player player, String[] strings) {
-    userData = plugin.getUserData(player, player.getUniqueId()).getPlayerData();
+    userData = new UserDataHandler(plugin, player, player.getUniqueId());
 
     if(strings.length == 0) {
       if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects", "deathwarden.admin")) {
@@ -34,8 +35,10 @@ public class DeathEffectsCommand extends PlayerCommand {
         return;
       }
 
-      if(userData.getBoolean("Death_Effects.Enabled")) {
-        userData.getBoolean("Death_Effects.Enabled", false);
+      if(userData.getPlayerData().getBoolean("Death_Effects.Enabled")) {
+        userData.getPlayerData().set("Death_Effects.Enabled", false);
+        userData.savePlayerData();
+
         if(configFile.getBoolean("Death_Effects_Login") && Utilities.checkPermissions(player, false, "deathwarden.deatheffects.login", "deathwarden.admin")) {
           plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), false);
         }
@@ -43,7 +46,8 @@ public class DeathEffectsCommand extends PlayerCommand {
         return;
       }
 
-      plugin.getUserData(player, player.getUniqueId()).getPlayerData().getBoolean("Death_Effects.Enabled", true);
+      userData.getPlayerData().set("Death_Effects.Enabled", true);
+      userData.savePlayerData();
       if(configFile.getBoolean("Death_Effects_Login") && Utilities.checkPermissions(player, false, "deathwarden.deatheffects.login", "deathwarden.admin")) {
         plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), true);
       }

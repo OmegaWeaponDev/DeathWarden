@@ -30,7 +30,7 @@ public class EntityDeathListener implements Listener {
       return;
     }
 
-    userData = plugin.getUserData(entityDeathEvent.getEntity().getKiller(), entityDeathEvent.getEntity().getKiller().getUniqueId());
+    userData = new UserDataHandler(plugin, entityDeathEvent.getEntity().getKiller(), entityDeathEvent.getEntity().getKiller().getUniqueId());
 
     for(String entity : userData.getPlayerData().getConfigurationSection("Creatures_Killed").getKeys(false)) {
 
@@ -38,7 +38,7 @@ public class EntityDeathListener implements Listener {
         int timesKilled = userData.getPlayerData().getInt("Creatures_Killed." + entity);
         int totalTimesKilled = plugin.getSettingsHandler().getTotalDeathsLog().getConfig().getInt("Creatures_Killed." + entity);
 
-        userData.getPlayerData().getInt("Creatures_Killed." + entity, timesKilled + 1);
+        userData.getPlayerData().set("Creatures_Killed." + entity, timesKilled + 1);
         plugin.getSettingsHandler().getTotalDeathsLog().getConfig().set("Creatures_Killed." + entity, totalTimesKilled + 1);
       }
     }

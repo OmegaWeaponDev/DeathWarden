@@ -6,6 +6,10 @@
 #  Here you are able to add/remove different particle and sounds effects that
 #  players are able to use for their own death effects.
 #
+#  You can find all the sounds here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+#  You can find all the particles here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html
+#  You can find all the materials here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#
 # -------------------------------------------------------------------------------------------
 
 Death_Effects_Menu:
@@ -59,11 +63,11 @@ Death_Sounds_Menu:
         - "#00D4FFthe chest opening sound"
         - "#00D4FFwhen you die"
     Block_Glass_Break:
-      Material: END_GATEWAY
-      Title: "#ff4a4aEnd Gateway Spawn"
+      Material: GLASS
+      Title: "#ff4a4aGlass Break"
       Lore:
         - "#00D4FFClick here to play"
-        - "#00D4FFthe end gateway sound"
+        - "#00D4FFthe glass break sound"
         - "#00D4FFwhen you die"
     Block_End_Portal_Frame_Fill:
       Material: END_PORTAL_FRAME
@@ -72,8 +76,8 @@ Death_Sounds_Menu:
         - "#00D4FFClick here to play"
         - "#00D4FFthe end portal fill sound"
         - "#00D4FFwhen you die"
-    Lava_Ambient:
-      Material: LAVA_BUCKET
+    Block_End_Portal_Spawn:
+      Material: END_STONE
       Title: "#ff4a4aEnd Portal Spawn"
       Lore:
         - "#00D4FFClick here to play"
@@ -139,105 +143,105 @@ Death_Sounds_Menu:
 Death_Particles_Menu:
   Menu_Title: "#ff4a4aDeath Particle Effects"
   Particles:
-    Ambient_Cave:
-      Material: WEB
+    Cloud:
+      Material: COBWEB
       Title: "#ff4a4aCloud"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe cloud particles when"
         - "#00D4FFyou die from now on"
-    Block_Anvil_Drop:
+    Campfire_Cosy_Smoke:
       Material: CAMPFIRE
       Title: "#ff4a4aCampfire Smoke"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe campfire smoke particles when"
         - "#00D4FFyou die from now on"
-    Block_Campfire_Crackle:
+    Crit:
       Material: GHAST_TEAR
       Title: "#ff4a4aCrit"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe crit particles when"
         - "#00D4FFyou die from now on"
-    Block_Chest_Open:
+    Dragon_Breath:
       Material: DRAGON_BREATH
       Title: "#ff4a4aDragon Breath"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe dragon breath particles when"
         - "#00D4FFyou die from now on"
-    Block_Glass_Break:
+    Dripping_Honey:
       Material: HONEYCOMB
       Title: "#ff4a4aDripping Honey"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe dripping honey particles when"
         - "#00D4FFyou die from now on"
-    Block_End_Portal_Frame_Fill:
-      Material: LAVA
+    Drip_Lava:
+      Material: LAVA_BUCKET
       Title: "#ff4a4aDripping Lava"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe dripping lava particles when"
         - "#00D4FFyou die from now on"
-    Lava_Ambient:
+    Enchantment_Table:
       Material: ENCHANTING_TABLE
       Title: "#ff4a4aEnchantment Table"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe enchantment table particles when"
         - "#00D4FFyou die from now on"
-    Block_Fire_Ambient:
-      Material: WEB
+    Explosion_Normal:
+      Material: COBWEB
       Title: "#ff4a4aExplosion Normal"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe normal explosion particles when"
         - "#00D4FFyou die from now on"
-    Block_Portal_Travel:
+    Falling_Dust:
       Material: DIRT
       Title: "#ff4a4aFalling Dust"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe falling dust particles when"
         - "#00D4FFyou die from now on"
-    Block_Portal_Ambient:
+    Fireworks_Spark:
       Material: FIREWORK_STAR
       Title: "#ff4a4aFireworks Spark"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe fireworks spark particles when"
         - "#00D4FFyou die from now on"
-    Entity_Ender_Eye_Launch:
-      Material: FIRE
+    Flame:
+      Material: FIRE_CHARGE
       Title: "#ff4a4aFlame"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe flame particles when"
         - "#00D4FFyou die from now on"
-    Entity_Generic_Hurt:
+    Heart:
       Material: RED_WOOL
       Title: "#ff4a4aHeart"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe heart particles when"
         - "#00D4FFyou die from now on"
-    Entity_Enderman_Teleport:
-      Material: NETHER_PORTAL
+    Portal:
+      Material: OBSIDIAN
       Title: "#ff4a4aPortal"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe portal particles when"
         - "#00D4FFyou die from now on"
-    Entity_Fox_Teleport:
+    Redstone:
       Material: REDSTONE
       Title: "#ff4a4aRedstone"
       Lore:
         - "#00D4FFClick here to display"
         - "#00D4FFthe redstone particles when"
         - "#00D4FFyou die from now on"
-    Entity_Player_Hurt:
+    Slime:
       Material: SLIME_BALL
       Title: "#ff4a4aSlime"
       Lore:

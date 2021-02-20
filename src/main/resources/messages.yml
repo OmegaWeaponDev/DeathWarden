@@ -54,7 +54,7 @@ Pvp_Kill_Counter:
   No_Kills: "#00D4FFYou have not killed any players!"
 
 PvP_Death_Messages:
-  Killed_By_Player: "#FF003E %killer% #00D4FFhas just killed #FF003E %player% #00D4FFusing #FF003E %weapon% #00D4FFand they only had #FF003E %hearts_remaining% #00D4FFhearts left!"
+  Killed_By_Player: "#FF003E%killer% #00D4FFhas just killed #FF003E%player% #00D4FFusing #FF003E%weapon% #00D4FFand they only had #FF003E%hearts_remaining% #00D4FFhearts left!"
 
 Death_By:
   # Customize all the death messages for when hostile mobs kill a player
@@ -98,8 +98,8 @@ Death_By:
 
   # Customize all the death messages for when players kill themselves.
   Environmental:
-    Custom: "#FF003E %player%#00D4FF, just went poof and was dead... No one knows how..."
-    Drowning: "#FF003E %player%#00D4FF, If you're going to go swimming, remember to breath..."
+    Custom: "#FF003E%player%#00D4FF, just went poof and was dead... No one knows how..."
+    Drowning: "#FF003E%player%#00D4FF, If you're going to go swimming, remember to breath..."
     Lightning: "#00D4FFI see thor is not happy with %player%..."
     Fire: "#00D4FFAs #FF003E%player% #00D4FFjust found out. Fire is very hot..."
     Suffocation: "#00D4FFDon't try breathing through blocks, it doesn't work. Am I right #FF003E%player%#00D4FF?"
@@ -108,21 +108,22 @@ Death_By:
     Void: "#00D4FFThere is a reason people stay out of the void #FF003E%player%#00D4FF..."
     Poison: "#00D4FFPoison.. What a way to go #FF003E%player%#00D4FF..."
     Magic: "#00D4FFAvada Kedavra! Just like that #FF003E%player% #00D4FFis now dead."
-    Block_Explosion: "#FF003E Block go boom, #FF003E%player% go boom"
+    Block_Explosion: "#FF003EBlock go boom, #FF003E%player% go boom"
 
 # The message received when resetting player data.
-Reset_Player_Data:
-  All_Players: "#00D4FFAll player data has now been reset."
-  One_Player: "#00D4FFThe player data for #FF003E%player% #00D4FFhas been reset!"
+Reset_Player_Data: "#00D4FFThe player data for #FF003E%player% #00D4FFhas been reset!"
 
 # The message received when resetting the total deaths log.
 Reset_Total_Deaths_Log: "#00D4FFTotal Deaths Log has now been reset."
+
+# The message received when resetting the pvpkills file.
+PvpKills_Reset: "#00D4FFThe PvpLogs file has been reset."
 
 # Sets the message the player is sent when they reload the plugin
 Reload_Message: "#560900DeathWarden #00D4FFhas successfully been reloaded"
 
 # Sets the message players receive when they don't have permission
-No_Permission: "#FF003E Sorry, you sadly don't have the required permission for that!"
+No_Permission: "#FF003ESorry, you sadly don't have the required permission for that!"
 
 # DO NOT EDIT THIS!
 Config_Version: 2.0

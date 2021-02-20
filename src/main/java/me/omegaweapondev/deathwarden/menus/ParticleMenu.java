@@ -3,6 +3,7 @@ package me.omegaweapondev.deathwarden.menus;
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.ItemCreator;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
+import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ public class ParticleMenu extends MenuCreator {
   private final FileConfiguration deathEffectsConfig;
   private final MessageHandler messageHandler;
 
+  private UserDataHandler userData;
   private ItemCreator itemCreator;
   private DeathEffectsMenu deathEffectsMenu;
 
@@ -39,8 +41,10 @@ public class ParticleMenu extends MenuCreator {
       }
 
       setItem(slot + 1, createItem("Death_Particles_Menu.Particles." + itemName), player -> {
-        plugin.getUserData(player, player.getUniqueId()).getPlayerData().getString("Death_Effects.Death_Particles", itemName.toUpperCase());
-        plugin.getUserData(player, player.getUniqueId()).savePlayerData();
+        userData = new UserDataHandler(plugin, player, player.getUniqueId());
+
+        userData.getPlayerData().set("Death_Effects.Death_Particle", itemName.toUpperCase());
+        userData.savePlayerData();
       });
     }
 

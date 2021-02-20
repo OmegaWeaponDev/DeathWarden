@@ -43,7 +43,7 @@ public class PlayerDeathListener implements Listener {
   public void onPlayerDeath(final PlayerDeathEvent playerDeathEvent) {
     playerDeathEvent.setDeathMessage(null);
     player = playerDeathEvent.getEntity();
-    userData = plugin.getUserData(player, player.getUniqueId());
+    userData = new UserDataHandler(plugin, player, player.getUniqueId());
     final Location deathLocation = player.getLocation();
 
     deathEffects(player);
@@ -51,12 +51,12 @@ public class PlayerDeathListener implements Listener {
     if(Utilities.checkPermissions(player, true, "deathwarden.back", "deathwarden.admin")) {
       plugin.getSettingsHandler().getDeathLocation().put(player.getUniqueId(), deathLocation);
 
-      userData.getPlayerData().getString("Last_Known_Death_Location.World", player.getWorld().getName());
-      userData.getPlayerData().getDouble("Last_Known_Death_Location.X", player.getLocation().getX());
-      userData.getPlayerData().getDouble("Last_Known_Death_Location.Y", player.getLocation().getY());
-      userData.getPlayerData().getDouble("Last_Known_Death_Location.Z", player.getLocation().getZ());
-      userData.getPlayerData().getDouble("Last_Known_Death_Location.Yaw", player.getLocation().getYaw());
-      userData.getPlayerData().getDouble("Last_Known_Death_Location.Pitch", player.getLocation().getPitch());
+      userData.getPlayerData().set("Last_Known_Death_Location.World", player.getWorld().getName());
+      userData.getPlayerData().set("Last_Known_Death_Location.X", player.getLocation().getX());
+      userData.getPlayerData().set("Last_Known_Death_Location.Y", player.getLocation().getY());
+      userData.getPlayerData().set("Last_Known_Death_Location.Z", player.getLocation().getZ());
+      userData.getPlayerData().set("Last_Known_Death_Location.Yaw", player.getLocation().getYaw());
+      userData.getPlayerData().set("Last_Known_Death_Location.Pitch", player.getLocation().getPitch());
 
       userData.savePlayerData();
     }
@@ -78,6 +78,11 @@ public class PlayerDeathListener implements Listener {
       deathMessages.deathByPlayer();
 
       logPvpDeath(player, player.getKiller());
+      userData = new UserDataHandler(plugin, player.getKiller(), player.getKiller().getUniqueId());
+      int pvpKills = userData.getPlayerData().getInt("Pvp_Kills");
+
+      userData.getPlayerData().set("Pvp_Kills", pvpKills + 1);
+      userData.savePlayerData();
     }
 
     if(player.getKiller() == null) {
@@ -87,6 +92,13 @@ public class PlayerDeathListener implements Listener {
       deathMessages = new DeathMessages(plugin, player, null,  player.getLastDamageCause());
       deathMessages.deathByCreatures();
     }
+
+    userData = new UserDataHandler(plugin, player, player.getUniqueId());
+    int deathCount = userData.getPlayerData().getInt("Death_Count");
+
+    userData.getPlayerData().set("Death_Count", deathCount + 1);
+    userData.savePlayerData();
+
   }
 
   @EventHandler
@@ -117,6 +129,10 @@ public class PlayerDeathListener implements Listener {
     userData = new UserDataHandler(plugin, player, player.getUniqueId());
     if(!userData.getPlayerData().getBoolean("Death_Effects.Enabled")) {
       return;
+    }
+
+    if(!plugin.getSettingsHandler().getDeathEffectsMap().containsKey(player.getUniqueId())) {
+      plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), userData.getPlayerData().getBoolean("Death_Effects.Enabled"));
     }
 
     if(!plugin.getSettingsHandler().getDeathEffectsMap().get(player.getUniqueId())) {
@@ -168,31 +184,31 @@ public class PlayerDeathListener implements Listener {
 
     // Player Stats
     pvpLog.createSection("Pvp_Kills." + playerTime);
-    pvpLog.set(playerTime + ".Player Killed", player.getName());
-    pvpLog.set(playerTime + ".Killed By", killer.getName());
-    pvpLog.set(playerTime + ".Killer Is Op", killer.isOp());
-    pvpLog.set(playerTime + ".Killer Is Flying", killer.isFlying());
-    pvpLog.set(playerTime + ".Killers Gamemode", killer.getGameMode().name());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Player Killed", player.getName());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Killed By", killer.getName());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Killer Is Op", killer.isOp());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Killer Is Flying", killer.isFlying());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Killers Gamemode", killer.getGameMode().name());
 
     // Weapon Stats
     pvpLog.createSection("Pvp_Kills." + playerTime + ".Weapon");
 
     if(killer.getInventory().getItemInMainHand().getType().isAir()) {
-      pvpLog.set(playerTime + ".Weapon" + ".Item", "Fists");
-      pvpLog.set(playerTime + ".Weapon" + ".Name", killer.getName() + "'s Fists");
-      pvpLog.set(playerTime + ".Weapon" + ".Enchants", "None");
+      pvpLog.set("Pvp_Kills." + playerTime + ".Weapon" + ".Item", "Fists");
+      pvpLog.set("Pvp_Kills." + playerTime + ".Weapon" + ".Name", killer.getName() + "'s Fists");
+      pvpLog.set("Pvp_Kills." + playerTime + ".Weapon" + ".Enchants", "None");
     } else {
-      pvpLog.set(playerTime + ".Weapon" + ".Item", killer.getInventory().getItemInMainHand().getType().name());
-      pvpLog.set(playerTime + ".Weapon" + ".Name", (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name());
-      pvpLog.set(playerTime + ".Weapon" + ".Enchants", killer.getInventory().getItemInMainHand().getItemMeta().hasEnchants());
+      pvpLog.set("Pvp_Kills." + playerTime + ".Weapon" + ".Item", killer.getInventory().getItemInMainHand().getType().name());
+      pvpLog.set("Pvp_Kills." + playerTime + ".Weapon" + ".Name", (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name());
+      pvpLog.set("Pvp_Kills." + playerTime + ".Weapon" + ".Enchants", killer.getInventory().getItemInMainHand().getItemMeta().hasEnchants());
     }
 
     // Death Location
     pvpLog.createSection("Pvp_Kills." + playerTime + ".Location");
-    pvpLog.set(playerTime + ".Location" + ".World", world);
-    pvpLog.set(playerTime + ".Location" + ".X", player.getLocation().getBlockX());
-    pvpLog.set(playerTime + ".Location" + ".Y", player.getLocation().getBlockY());
-    pvpLog.set(playerTime + ".Location" + ".Z", player.getLocation().getBlockZ());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Location" + ".World", world);
+    pvpLog.set("Pvp_Kills." + playerTime + ".Location" + ".X", player.getLocation().getBlockX());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Location" + ".Y", player.getLocation().getBlockY());
+    pvpLog.set("Pvp_Kills." + playerTime + ".Location" + ".Z", player.getLocation().getBlockZ());
 
     // Save the file
     plugin.getSettingsHandler().getPvpLog().saveConfig();

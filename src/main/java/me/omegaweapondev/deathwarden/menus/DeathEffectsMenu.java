@@ -28,7 +28,7 @@ public class DeathEffectsMenu extends MenuCreator {
     messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
     deathEffectsMenu =  plugin.getSettingsHandler().getDeathEffectMenus().getConfig();
 
-    setItem(10, createItem("Death_Effects_Menu.Death_Sounds_Button"), player -> {
+    setItem(11, createItem("Death_Effects_Menu.Death_Sounds_Button"), player -> {
       if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects.sound", "deathwarden.admin")) {
         Utilities.message(player, messageHandler.string("No_Permission", "#ff4a4aSorry, you do not have permission to use that."));
         return;
@@ -39,7 +39,7 @@ public class DeathEffectsMenu extends MenuCreator {
       soundMenu.openInventory(player);
     });
 
-    setItem(12, createItem("Death_Effects_Menu.Death_Particles_Button"), player -> {
+    setItem(13, createItem("Death_Effects_Menu.Death_Particles_Button"), player -> {
       if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects.particle", "deathwarden.admin")) {
         Utilities.message(player, messageHandler.string("No_Permission", "#ff4a4aSorry, you do not have permission to use that."));
         return;
@@ -50,7 +50,7 @@ public class DeathEffectsMenu extends MenuCreator {
       particleMenu.openInventory(player);
     });
 
-    setItem(14, createItemStack("BARRIER", Utilities.colourise("#570000Close"), Utilities.colourise(Arrays.asList("#ff4a4aClick here to close", "#ff4a4athe name colour gui"))), HumanEntity::closeInventory);
+    setItem(15, createItemStack("BARRIER", Utilities.colourise("#570000Close"), Utilities.colourise(Arrays.asList("#ff4a4aClick here to close", "#ff4a4athe name colour gui"))), HumanEntity::closeInventory);
   }
 
   private ItemStack createItem(final String deathEffectItem) {

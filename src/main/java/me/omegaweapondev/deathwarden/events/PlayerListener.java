@@ -35,7 +35,7 @@ public class PlayerListener implements Listener {
     // Get the player that is joining
     final Player player = playerJoinEvent.getPlayer();
 
-    userData = plugin.getUserData(player, player.getUniqueId());
+    userData = new UserDataHandler(plugin, player, player.getUniqueId());
     userData.createUserFile();
 
     // Check if the player has permission to receive plugin update messages.
@@ -84,5 +84,4 @@ public class PlayerListener implements Listener {
     DeathCommands deathCommands = new DeathCommands(plugin, player, null);
     deathCommands.respawnCommands();
   }
-
 }

@@ -28,6 +28,6 @@ public class BackCommand extends PlayerCommand {
 
     player.teleport(plugin.getSettingsHandler().getDeathLocation().get(player.getUniqueId()));
     plugin.getSettingsHandler().getDeathLocation().remove(player.getUniqueId());
-    Utilities.message(player, "Back_On_Death", "#00D4FFYou have returned to your last known death location.");
+    Utilities.message(player, messageHandler.string("Back_On_Death", "#00D4FFYou have returned to your last known death location."));
   }
 }

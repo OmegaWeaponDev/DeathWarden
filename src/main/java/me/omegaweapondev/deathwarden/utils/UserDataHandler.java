@@ -95,7 +95,7 @@ public class UserDataHandler {
     userData.set("Death_Particles", "EXPLOSION_NORMAL");
     userData.set("Death_Count", 0);
     userData.set("Pvp_Kills", 0);
-    userData.set("Last_Known_Death_Location.World", "''");
+    userData.set("Last_Known_Death_Location.World", "world");
     userData.set("Last_Known_Death_Location.X", 0);
     userData.set("Last_Known_Death_Location.Y", 0);
     userData.set("Last_Known_Death_Location.Z", 0);
