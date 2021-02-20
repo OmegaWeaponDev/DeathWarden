@@ -6,7 +6,8 @@ import me.omegaweapondev.deathwarden.menus.DeathEffectsMenu;
 import me.omegaweapondev.deathwarden.menus.ParticleMenu;
 import me.omegaweapondev.deathwarden.menus.SoundMenu;
 import me.omegaweapondev.deathwarden.utils.Placeholders;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
+import me.omegaweapondev.deathwarden.utils.SettingsHandler;
+import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.SpigotUpdater;
 import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
@@ -18,9 +19,12 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.UUID;
+
 public class DeathWarden extends JavaPlugin {
   private DeathWarden plugin;
-  private StorageManager storageManager;
+  private SettingsHandler settingsHandler;
+  private UserDataHandler userData;
   private Economy econ = null;
 
   private ParticleMenu particleMenu;
@@ -30,11 +34,11 @@ public class DeathWarden extends JavaPlugin {
   @Override
   public void onEnable() {
     plugin = this;
-    storageManager = new StorageManager(plugin);
+    settingsHandler = new SettingsHandler(plugin);
 
     initialSetup();
-    storageManager.setupConfigs();
-    storageManager.configUpdater();
+    getSettingsHandler().setupConfigs();
+    getSettingsHandler().configUpdater();
     setupCommands();
     setupEvents();
     setupEconomy();
@@ -62,17 +66,15 @@ public class DeathWarden extends JavaPlugin {
       }
     }
 
-    storageManager.getDeathEffectsMap().clear();
-    storageManager.getDeathLocation().clear();
-    storageManager.getPenaltyMap().clear();
+    getSettingsHandler().getDeathEffectsMap().clear();
+    getSettingsHandler().getDeathLocation().clear();
+    getSettingsHandler().getPenaltyMap().clear();
 
     super.onDisable();
   }
 
   public void onReload() {
-    getStorageManager().getConfigFile().reloadConfig();
-    getStorageManager().getMessagesFile().reloadConfig();
-    getStorageManager().getDeathEffectMenus().reloadConfig();
+    getSettingsHandler().reloadFiles();
   }
 
   private void initialSetup() {
@@ -86,8 +88,7 @@ public class DeathWarden extends JavaPlugin {
 
     if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
       Utilities.logWarning(true,
-        "Stylizer requires PlaceholderAPI to be installed if you are wanting to use the `%stylizer_namecolour%` placeholder",
-        "It is also required if you are wanting to use placeholders in any of the chat formats.",
+        "DeathWarden requires PlaceholderAPI to be installed if you are wanting to use the placeholders",
         "You can install PlaceholderAPI here: https://www.spigotmc.org/resources/placeholderapi.6245/ "
       );
     }
@@ -172,14 +173,13 @@ public class DeathWarden extends JavaPlugin {
       return;
     }
 
-    if(!getStorageManager().getConfigFile().getConfig().getBoolean("Death_Effects_Restart")) {
+    if(!getSettingsHandler().getConfigFile().getConfig().getBoolean("Death_Effects_Restart")) {
       return;
     }
 
     for(Player player : Bukkit.getOnlinePlayers()) {
       if(Utilities.checkPermissions(player, true, "deathwarden.deatheffects", "deathwarden.admin")) {
-        StorageManager playerData = new StorageManager(plugin, player, player.getUniqueId());
-        storageManager.getDeathEffectsMap().put(player.getUniqueId(), playerData.getUserBoolean("Death_Effects.Enabled"));
+        getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), getUserData(player, player.getUniqueId()).getPlayerData().getBoolean("Death_Effects.Enabled"));
       }
     }
   }
@@ -188,7 +188,12 @@ public class DeathWarden extends JavaPlugin {
     return econ;
   }
 
-  public StorageManager getStorageManager() {
-    return storageManager;
+  public SettingsHandler getSettingsHandler() {
+    return settingsHandler;
+  }
+
+  public UserDataHandler getUserData(Player player, UUID playerUUID) {
+    userData = new UserDataHandler(plugin, player, playerUUID);
+    return userData;
   }
 }

@@ -3,7 +3,6 @@ package me.omegaweapondev.deathwarden.menus;
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.ItemCreator;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
 import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
 import org.bukkit.Material;
@@ -17,38 +16,37 @@ import java.util.List;
 public class DeathEffectsMenu extends MenuCreator {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
-  private final StorageManager storageManager;
   private final FileConfiguration deathEffectsMenu;
 
   private SoundMenu soundMenu;
   private ParticleMenu particleMenu;
-
   private ItemCreator itemCreator;
 
   public DeathEffectsMenu(final DeathWarden plugin, int inventoryRows, String inventoryName, String defaultInventoryName) {
     super(inventoryRows, inventoryName, defaultInventoryName);
     this.plugin = plugin;
-    storageManager = plugin.getStorageManager();
-    messageHandler = new MessageHandler(plugin, storageManager.getMessagesFile().getConfig());
-    deathEffectsMenu = storageManager.getDeathEffectMenus().getConfig();
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
+    deathEffectsMenu =  plugin.getSettingsHandler().getDeathEffectMenus().getConfig();
 
     setItem(10, createItem("Death_Effects_Menu.Death_Sounds_Button"), player -> {
       if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects.sound", "deathwarden.admin")) {
+        Utilities.message(player, messageHandler.string("No_Permission", "#ff4a4aSorry, you do not have permission to use that."));
         return;
       }
 
       player.closeInventory();
-      soundMenu = new SoundMenu(plugin, 4, Utilities.colourise(deathEffectsMenu.getString("Death_Effects_Menu.Death_Sounds_Button.Title")), "#00D4FFDeath Sounds Menu");
+      soundMenu = new SoundMenu(plugin, 4, Utilities.colourise(deathEffectsMenu.getString("Death_Sounds_Menu.Menu_Title")), "#00D4FFDeath Sounds Menu");
       soundMenu.openInventory(player);
     });
 
     setItem(12, createItem("Death_Effects_Menu.Death_Particles_Button"), player -> {
       if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects.particle", "deathwarden.admin")) {
+        Utilities.message(player, messageHandler.string("No_Permission", "#ff4a4aSorry, you do not have permission to use that."));
         return;
       }
 
       player.closeInventory();
-      particleMenu = new ParticleMenu(plugin, 4, Utilities.colourise(deathEffectsMenu.getString("Death_Effects_Menu.Death_Particles_Button.Title")), "#00D4FFDeath Particles Menu");
+      particleMenu = new ParticleMenu(plugin, 4, Utilities.colourise(deathEffectsMenu.getString("Death_Particles_Menu.Menu_Title")), "#00D4FFDeath Particles Menu");
       particleMenu.openInventory(player);
     });
 

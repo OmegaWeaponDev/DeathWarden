@@ -42,6 +42,8 @@ permissions:
       - deathwarden.deatheffects
       - deathwarden.deatheffects.edit
       - deathwarden.deatheffects.login
+      - deathwarden.deatheffects.sound
+      - deathwarden.deatheffects.particle
       - deathwarden.back
       - deathwarden.keepxp
       - deathwarden.debug
@@ -75,6 +77,12 @@ permissions:
     default: false
   deathwarden.deatheffects.login:
     description: Allows the user to keep thier death effects when login/logout
+    default: false
+  deathwarden.deatheffects.sound:
+    description: Allows the user to edit thier death sounds
+    default: false
+  deathwarden.deatheffects.particle:
+    description: Allows the user to edit thier death particles
     default: false
   deathwarden.back:
     description: Grants the user access to the back command

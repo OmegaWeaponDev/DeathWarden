@@ -3,7 +3,6 @@ package me.omegaweapondev.deathwarden.menus;
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.ItemCreator;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
 import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
 import org.bukkit.Material;
@@ -20,17 +19,15 @@ public class ParticleMenu extends MenuCreator {
   private final FileConfiguration deathEffectsConfig;
   private final MessageHandler messageHandler;
 
-  private StorageManager storageManager;
   private ItemCreator itemCreator;
   private DeathEffectsMenu deathEffectsMenu;
 
   public ParticleMenu(final DeathWarden plugin, int inventoryRows, String inventoryName, String defaultInventoryName) {
     super(inventoryRows, inventoryName, defaultInventoryName);
     this.plugin = plugin;
-    storageManager = new StorageManager(plugin);
-    configFile = storageManager.getConfigFile().getConfig();
-    messageHandler = new MessageHandler(plugin, storageManager.getMessagesFile().getConfig());
-    deathEffectsConfig = storageManager.getDeathEffectMenus().getConfig();
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
+    deathEffectsConfig = plugin.getSettingsHandler().getDeathEffectMenus().getConfig();
 
     int slot = -2;
 
@@ -41,11 +38,9 @@ public class ParticleMenu extends MenuCreator {
         return;
       }
 
-      setItem(slot + 1, createItem(deathEffectsConfig.getString("Death_Particles_Menu.Particles." + itemName)), player -> {
-        storageManager = new StorageManager(plugin, player, player.getUniqueId());
-
-        storageManager.setUserString("Death_Effects.Death_Particles", itemName.toUpperCase());
-        storageManager.savePlayerData();
+      setItem(slot + 1, createItem("Death_Particles_Menu.Particles." + itemName), player -> {
+        plugin.getUserData(player, player.getUniqueId()).getPlayerData().getString("Death_Effects.Death_Particles", itemName.toUpperCase());
+        plugin.getUserData(player, player.getUniqueId()).savePlayerData();
       });
     }
 
@@ -71,7 +66,7 @@ public class ParticleMenu extends MenuCreator {
 
     itemCreator = new ItemCreator(Material.getMaterial(deathEffectsConfig.getString(deathEffectItem + ".Material").toUpperCase()));
     itemCreator.setDisplayName(deathEffectsConfig.getString(deathEffectItem + ".Title"));
-    itemCreator.setLore(deathEffectsConfig.getStringList(deathEffectsConfig + ".Lore"));
+    itemCreator.setLore(deathEffectsConfig.getStringList(deathEffectItem + ".Lore"));
 
     return itemCreator.getItem();
   }

@@ -1,7 +1,7 @@
 package me.omegaweapondev.deathwarden.events;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
+import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +11,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 public class EntityDeathListener implements Listener {
   private final DeathWarden plugin;
-  private StorageManager storageManager;
+
+  private UserDataHandler userData;
 
   public EntityDeathListener(final DeathWarden plugin) {
     this.plugin = plugin;
@@ -29,19 +30,19 @@ public class EntityDeathListener implements Listener {
       return;
     }
 
-    storageManager = new StorageManager(plugin, entityDeathEvent.getEntity().getKiller(), entityDeathEvent.getEntity().getKiller().getUniqueId());
+    userData = plugin.getUserData(entityDeathEvent.getEntity().getKiller(), entityDeathEvent.getEntity().getKiller().getUniqueId());
 
-    for(String entity : storageManager.getUserSection("Creatures_Killed")) {
+    for(String entity : userData.getPlayerData().getConfigurationSection("Creatures_Killed").getKeys(false)) {
 
       if(entityType == EntityType.valueOf(entity.toUpperCase())) {
-        int timesKilled = storageManager.getUserInt("Creatures_Killed." + entity);
-        int totalTimesKilled = plugin.getStorageManager().getTotalDeathsLog().getConfig().getInt("Creatures_Killed." + entity);
+        int timesKilled = userData.getPlayerData().getInt("Creatures_Killed." + entity);
+        int totalTimesKilled = plugin.getSettingsHandler().getTotalDeathsLog().getConfig().getInt("Creatures_Killed." + entity);
 
-        storageManager.setUserInt("Creatures_Killed." + entity, timesKilled + 1);
-        plugin.getStorageManager().getTotalDeathsLog().getConfig().set("Creatures_Killed." + entity, totalTimesKilled + 1);
+        userData.getPlayerData().getInt("Creatures_Killed." + entity, timesKilled + 1);
+        plugin.getSettingsHandler().getTotalDeathsLog().getConfig().set("Creatures_Killed." + entity, totalTimesKilled + 1);
       }
     }
-    storageManager.savePlayerData();
-    plugin.getStorageManager().getTotalDeathsLog().saveConfig();
+    userData.savePlayerData();
+    plugin.getSettingsHandler().getTotalDeathsLog().saveConfig();
   }
 }

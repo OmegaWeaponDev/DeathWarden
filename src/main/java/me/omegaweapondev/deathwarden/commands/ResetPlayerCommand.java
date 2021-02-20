@@ -2,7 +2,6 @@ package me.omegaweapondev.deathwarden.commands;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
 import me.ou.library.Utilities;
 import me.ou.library.commands.GlobalCommand;
 import org.bukkit.Bukkit;
@@ -14,11 +13,9 @@ public class ResetPlayerCommand extends GlobalCommand {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
 
-  private StorageManager storageManager;
-
   public ResetPlayerCommand(final DeathWarden plugin) {
     this.plugin = plugin;
-    messageHandler = new MessageHandler(plugin, plugin.getStorageManager().getMessagesFile().getConfig());
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
   }
 
   @Override
@@ -31,8 +28,7 @@ public class ResetPlayerCommand extends GlobalCommand {
 
       if(strings[0].equalsIgnoreCase("all")) {
         for(OfflinePlayer player : Bukkit.getOfflinePlayers()) {
-          storageManager = new StorageManager(plugin, (Player) player, player.getUniqueId());
-          storageManager.resetPlayerData();
+          plugin.getUserData((Player) player, player.getUniqueId()).resetPlayerData();
         }
         Utilities.logInfo(true, "All player data has now been reset.");
         return;
@@ -42,9 +38,7 @@ public class ResetPlayerCommand extends GlobalCommand {
       if(player == null) {
         return;
       }
-
-      storageManager = new StorageManager(plugin, player, player.getUniqueId());
-      storageManager.resetPlayerData();
+      plugin.getUserData(player, player.getUniqueId()).resetPlayerData();
 
       Utilities.logInfo(true, "The player data for " + player.getName() + " has been reset!");
       return;
@@ -65,8 +59,7 @@ public class ResetPlayerCommand extends GlobalCommand {
 
       if(strings[0].equalsIgnoreCase("all")) {
         for(OfflinePlayer resetPlayer : Bukkit.getOfflinePlayers()) {
-          storageManager = new StorageManager(plugin, (Player) resetPlayer, player.getUniqueId());
-          storageManager.resetPlayerData();
+          plugin.getUserData((Player) resetPlayer, resetPlayer.getUniqueId()).resetPlayerData();
         }
         Utilities.message(player, messageHandler.string("Reset_Player_Data.All_Players", "#00D4FFAll player data has now been reset."));
         return;
@@ -83,9 +76,7 @@ public class ResetPlayerCommand extends GlobalCommand {
     if(resetPlayer == null) {
       return;
     }
-
-    storageManager = new StorageManager(plugin, player, player.getUniqueId());
-    storageManager.resetPlayerData();
+    plugin.getUserData(resetPlayer, resetPlayer.getUniqueId()).resetPlayerData();
 
     Utilities.message(player, messageHandler.string("Reset_Player_Data.One_Player", "#00D4FFThe player data for #FF003E%player% #00D4FFhas been reset!").replace("%player%", resetPlayer.getName()));
   }

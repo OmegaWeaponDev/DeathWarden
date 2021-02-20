@@ -23,8 +23,8 @@ public class DeathMessages {
     this.damageByEntityEvent = damageByEntityEvent;
     this.killer = killer;
 
-    messageHandler = new MessageHandler(plugin, plugin.getStorageManager().getMessagesFile().getConfig());
-    configFile = plugin.getStorageManager().getConfigFile().getConfig();
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
   }
 
   public void deathByCreatures() {

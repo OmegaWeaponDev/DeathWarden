@@ -1,10 +1,7 @@
 package me.omegaweapondev.deathwarden.events;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
-import me.omegaweapondev.deathwarden.utils.DeathCommands;
-import me.omegaweapondev.deathwarden.utils.DeathMessages;
-import me.omegaweapondev.deathwarden.utils.MessageHandler;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
+import me.omegaweapondev.deathwarden.utils.*;
 import me.ou.library.Utilities;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -22,49 +19,46 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class PlayerDeathListener implements Listener {
   private final DeathWarden plugin;
   private final FileConfiguration configFile;
   private final FileConfiguration pvpLog;
   private final MessageHandler messageHandler;
-  private static final Map<UUID, Location> deathLocationMap = new HashMap<>();
 
   private Player player;
   private DeathCommands deathCommands;
-  private StorageManager storageManager;
+  private UserDataHandler userData;
   private DeathMessages deathMessages;
 
   public PlayerDeathListener(final DeathWarden plugin){
     this.plugin = plugin;
-    configFile = plugin.getStorageManager().getConfigFile().getConfig();
-    messageHandler = new MessageHandler(plugin, plugin.getStorageManager().getMessagesFile().getConfig());
-    pvpLog = plugin.getStorageManager().getPvpLog().getConfig();
+
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
+    pvpLog = plugin.getSettingsHandler().getPvpLog().getConfig();
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onPlayerDeath(final PlayerDeathEvent playerDeathEvent) {
     playerDeathEvent.setDeathMessage(null);
     player = playerDeathEvent.getEntity();
-    storageManager = new StorageManager(plugin, player, player.getUniqueId());
+    userData = plugin.getUserData(player, player.getUniqueId());
     final Location deathLocation = player.getLocation();
 
     deathEffects(player);
 
     if(Utilities.checkPermissions(player, true, "deathwarden.back", "deathwarden.admin")) {
-      deathLocationMap.put(player.getUniqueId(), deathLocation);
+      plugin.getSettingsHandler().getDeathLocation().put(player.getUniqueId(), deathLocation);
 
-      storageManager.setUserString("Last_Known_Death_Location.World", player.getWorld().getName());
-      storageManager.setUserDouble("Last_Known_Death_Location.X", player.getLocation().getX());
-      storageManager.setUserDouble("Last_Known_Death_Location.Y", player.getLocation().getY());
-      storageManager.setUserDouble("Last_Known_Death_Location.Z", player.getLocation().getZ());
-      storageManager.setUserDouble("Last_Known_Death_Location.Yaw", player.getLocation().getYaw());
-      storageManager.setUserDouble("Last_Known_Death_Location.Pitch", player.getLocation().getPitch());
+      userData.getPlayerData().getString("Last_Known_Death_Location.World", player.getWorld().getName());
+      userData.getPlayerData().getDouble("Last_Known_Death_Location.X", player.getLocation().getX());
+      userData.getPlayerData().getDouble("Last_Known_Death_Location.Y", player.getLocation().getY());
+      userData.getPlayerData().getDouble("Last_Known_Death_Location.Z", player.getLocation().getZ());
+      userData.getPlayerData().getDouble("Last_Known_Death_Location.Yaw", player.getLocation().getYaw());
+      userData.getPlayerData().getDouble("Last_Known_Death_Location.Pitch", player.getLocation().getPitch());
 
-      storageManager.savePlayerData();
+      userData.savePlayerData();
     }
 
     if(Utilities.checkPermissions(player, true, "deathwarden.keepinv", "deathwarden.admin")) {
@@ -120,17 +114,17 @@ public class PlayerDeathListener implements Listener {
   }
 
   private void deathEffects(final Player player) {
-    storageManager = new StorageManager(plugin, player, player.getUniqueId());
-    if(!storageManager.getUserBoolean("Death_Effects.Enabled")) {
+    userData = new UserDataHandler(plugin, player, player.getUniqueId());
+    if(!userData.getPlayerData().getBoolean("Death_Effects.Enabled")) {
       return;
     }
 
-    if(!storageManager.getDeathEffectsMap().get(player.getUniqueId())) {
+    if(!plugin.getSettingsHandler().getDeathEffectsMap().get(player.getUniqueId())) {
       return;
     }
 
-    String particles = storageManager.getUserString("Death_Effects.Death_Particle");
-    String sound = storageManager.getUserString("Death_Effects.Death_Sound");
+    String particles = userData.getPlayerData().getString("Death_Effects.Death_Particle");
+    String sound = userData.getPlayerData().getString("Death_Effects.Death_Sound");
 
     player.spawnParticle(Particle.valueOf(particles), player.getLocation(), 1);
     player.playSound(player.getLocation(), Sound.valueOf(sound), 1, 1);
@@ -201,7 +195,7 @@ public class PlayerDeathListener implements Listener {
     pvpLog.set(playerTime + ".Location" + ".Z", player.getLocation().getBlockZ());
 
     // Save the file
-    plugin.getStorageManager().getPvpLog().saveConfig();
+    plugin.getSettingsHandler().getPvpLog().saveConfig();
   }
 
   private void withdrawDeathMoney(final Player player) {
@@ -217,7 +211,7 @@ public class PlayerDeathListener implements Listener {
         for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
           Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Timer") * 20, configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Amplifier"), true, true, true);
         }
-        storageManager.getPenaltyMap().put(player.getUniqueId(), true);
+        plugin.getSettingsHandler().getPenaltyMap().put(player.getUniqueId(), true);
         return;
       }
 
@@ -232,7 +226,7 @@ public class PlayerDeathListener implements Listener {
       for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
         Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Timer") * 20, configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Amplifier"), true, true, true);
       }
-      storageManager.getPenaltyMap().put(player.getUniqueId(), true);
+      plugin.getSettingsHandler().getPenaltyMap().put(player.getUniqueId(), true);
       return;
     }
 

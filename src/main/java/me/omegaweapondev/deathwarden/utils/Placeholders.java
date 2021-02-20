@@ -6,7 +6,8 @@ import org.bukkit.entity.Player;
 
 public class Placeholders extends PlaceholderExpansion {
   private final DeathWarden plugin;
-  private StorageManager storageManager;
+
+  private UserDataHandler userData;
 
   public Placeholders(final DeathWarden plugin) {
     this.plugin = plugin;
@@ -74,29 +75,29 @@ public class Placeholders extends PlaceholderExpansion {
    */
   @Override
   public String onPlaceholderRequest(Player player, String identifier) {
-    storageManager = new StorageManager(plugin, player, player.getUniqueId());
+    userData = plugin.getUserData(player, player.getUniqueId());
 
     // %deathwarden_hasDeathEffects%
     if(identifier.equalsIgnoreCase("hasdeatheffects")) {
-      return String.valueOf(storageManager.getUserBoolean("Death_Effects.Enabled"));
+      return String.valueOf(userData.getPlayerData().getBoolean("Death_Effects.Enabled"));
     }
 
     // %deathwarden_deaths% OR %deathwarden_deathcount%
     if(identifier.equalsIgnoreCase("deaths") || identifier.equalsIgnoreCase("deathcount")){
-      return String.valueOf(storageManager.getUserInt("Death_Count"));
+      return String.valueOf(userData.getPlayerData().getInt("Death_Count"));
     }
 
     // %deathwarden_pvpkills%
     if(identifier.equalsIgnoreCase("pvpkills")) {
-      return String.valueOf(storageManager.getUserInt("Pvp_Kills"));
+      return String.valueOf(userData.getPlayerData().getInt("Pvp_Kills"));
     }
 
     // %deathwarden_player_totalKills%
     if(identifier.equalsIgnoreCase("kills_totalKills")) {
       int totalKills = 0;
 
-      for(int i = 0; i < storageManager.getUserSection("Creatures_Killed").size(); i++) {
-        totalKills = totalKills + storageManager.getUserInt("Creatures_Killed." + i);
+      for(int i = 0; i < userData.getPlayerData().getConfigurationSection("Creatures_Killed").getKeys(false).size(); i++) {
+        totalKills = totalKills + userData.getPlayerData().getInt("Creatures_Killed." + i);
       }
 
       return String.valueOf(totalKills);
@@ -106,7 +107,7 @@ public class Placeholders extends PlaceholderExpansion {
     if(identifier.equalsIgnoreCase("totalkills")) {
       int totalKills = 0;
 
-      for(int i = 0; i < plugin.getStorageManager().getTotalDeathsLog().getConfig().getConfigurationSection("Creatures_Killed").getKeys(false).size(); i++) {
+      for(int i = 0; i < plugin.getSettingsHandler().getTotalDeathsLog().getConfig().getConfigurationSection("Creatures_Killed").getKeys(false).size(); i++) {
         totalKills = totalKills + i;
       }
       return String.valueOf(totalKills);
@@ -115,9 +116,9 @@ public class Placeholders extends PlaceholderExpansion {
     // %deathwarden_kills_<mobname>% i.e %deathwarden_kills_skeleton%
     if(identifier.contains("kills_")) {
 
-      for(String creature : storageManager.getUserSection("Creatures_Killed")) {
+      for(String creature : userData.getPlayerData().getConfigurationSection("Creatures_Killed").getKeys(false)) {
         if(identifier.equalsIgnoreCase("kills_" + creature.toLowerCase())) {
-          return String.valueOf(storageManager.getUserInt("Creatures_Killed." + creature));
+          return String.valueOf(userData.getPlayerData().getInt("Creatures_Killed." + creature));
         }
       }
     }
@@ -125,7 +126,7 @@ public class Placeholders extends PlaceholderExpansion {
     // %deathwarden_totalkills_creature_<creature>% i.e %deathwarden_totalkills_creature_skeleton%
     if(identifier.contains("totalKills_creature_")) {
 
-      for(String creature : plugin.getStorageManager().getTotalDeathsLog().getConfig().getConfigurationSection("Creatures_Killed").getKeys(false)) {
+      for(String creature : plugin.getSettingsHandler().getTotalDeathsLog().getConfig().getConfigurationSection("Creatures_Killed").getKeys(false)) {
         if(identifier.equalsIgnoreCase("totalkills_creature_" + creature)) {
           return String.valueOf(creature);
         }

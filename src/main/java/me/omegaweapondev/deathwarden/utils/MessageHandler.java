@@ -13,7 +13,8 @@ public class MessageHandler {
   public MessageHandler(final DeathWarden plugin, final FileConfiguration messagesFile) {
     this.plugin = plugin;
     this.messagesFile = messagesFile;
-    this.configName = plugin.getStorageManager().getMessagesFile().getFileName();
+
+    this.configName = plugin.getSettingsHandler().getMessagesFile().getFileName();
   }
 
   public String string(final String message, final String fallbackMessage) {

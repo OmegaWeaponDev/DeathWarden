@@ -21,7 +21,7 @@ public class DeathCommands {
     this.player = player;
     this.killer = killer;
 
-    configFile = plugin.getStorageManager().getConfigFile().getConfig();
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
   }
 
   public void respawnCommands() {

@@ -3,7 +3,6 @@ package me.omegaweapondev.deathwarden.commands;
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.menus.DeathEffectsMenu;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
 import me.ou.library.Utilities;
 import me.ou.library.commands.PlayerCommand;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,19 +14,19 @@ public class DeathEffectsCommand extends PlayerCommand {
   private final FileConfiguration deathEffectsConfig;
   private final FileConfiguration configFile;
 
+  private FileConfiguration userData;
   private DeathEffectsMenu deathEffectsMenu;
-  private StorageManager storageManager;
 
   public DeathEffectsCommand(final DeathWarden plugin) {
     this.plugin = plugin;
-    messageHandler = new MessageHandler(plugin, plugin.getStorageManager().getMessagesFile().getConfig());
-    deathEffectsConfig = plugin.getStorageManager().getDeathEffectMenus().getConfig();
-    configFile = plugin.getStorageManager().getConfigFile().getConfig();
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
+    deathEffectsConfig = plugin.getSettingsHandler().getDeathEffectMenus().getConfig();
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
   }
 
   @Override
   protected void execute(Player player, String[] strings) {
-    storageManager = new StorageManager(plugin, player, player.getUniqueId());
+    userData = plugin.getUserData(player, player.getUniqueId()).getPlayerData();
 
     if(strings.length == 0) {
       if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects", "deathwarden.admin")) {
@@ -35,18 +34,18 @@ public class DeathEffectsCommand extends PlayerCommand {
         return;
       }
 
-      if(storageManager.getUserBoolean("Death_Effects.Enabled")) {
-        storageManager.setUserBoolean("Death_Effects.Enabled", false);
+      if(userData.getBoolean("Death_Effects.Enabled")) {
+        userData.getBoolean("Death_Effects.Enabled", false);
         if(configFile.getBoolean("Death_Effects_Login") && Utilities.checkPermissions(player, false, "deathwarden.deatheffects.login", "deathwarden.admin")) {
-          storageManager.getDeathEffectsMap().put(player.getUniqueId(), false);
+          plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), false);
         }
         Utilities.message(player, messageHandler.string("Death_Effects_Removed", "#00D4FFBack to the old boring deaths."));
         return;
       }
 
-      storageManager.setUserBoolean("Death_Effects.Enabled", true);
+      plugin.getUserData(player, player.getUniqueId()).getPlayerData().getBoolean("Death_Effects.Enabled", true);
       if(configFile.getBoolean("Death_Effects_Login") && Utilities.checkPermissions(player, false, "deathwarden.deatheffects.login", "deathwarden.admin")) {
-        storageManager.getDeathEffectsMap().put(player.getUniqueId(), true);
+        plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), true);
       }
       Utilities.message(player, messageHandler.string("Death_Effects_Applied", "#00D4FFEnjoy your new cool death effects!"));
       return;

@@ -2,7 +2,6 @@ package me.omegaweapondev.deathwarden.commands;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
 import me.ou.library.Utilities;
 import me.ou.library.commands.GlobalCommand;
 import me.ou.library.menus.MenuCreator;
@@ -13,13 +12,11 @@ import org.bukkit.plugin.Plugin;
 
 public class DebugCommand extends GlobalCommand {
   private final DeathWarden plugin;
-  private final StorageManager storageManager;
   private final MessageHandler messageHandler;
 
   public DebugCommand(final DeathWarden plugin) {
     this.plugin = plugin;
-    storageManager = new StorageManager(plugin);
-    messageHandler = new MessageHandler(plugin, plugin.getStorageManager().getMessagesFile().getConfig());
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
   }
 
   @Override

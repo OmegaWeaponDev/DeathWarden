@@ -3,7 +3,7 @@ package me.omegaweapondev.deathwarden.events;
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.DeathCommands;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
-import me.omegaweapondev.deathwarden.utils.StorageManager;
+import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.SpigotUpdater;
 import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
@@ -17,22 +17,17 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class PlayerListener implements Listener {
   private final DeathWarden plugin;
   private final FileConfiguration configFile;
   private final MessageHandler messageHandler;
-  private static final Map<UUID, Boolean> deathEffectsMap = new HashMap<>();
 
-  private StorageManager storageManager;
+  private UserDataHandler userData;
 
   public PlayerListener(final DeathWarden plugin) {
     this.plugin = plugin;
-    configFile = plugin.getStorageManager().getConfigFile().getConfig();
-    messageHandler = new MessageHandler(plugin, plugin.getStorageManager().getMessagesFile().getConfig());
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
+    messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
@@ -40,8 +35,8 @@ public class PlayerListener implements Listener {
     // Get the player that is joining
     final Player player = playerJoinEvent.getPlayer();
 
-    storageManager = new StorageManager(plugin, player, player.getUniqueId());
-    storageManager.createUserFile();
+    userData = plugin.getUserData(player, player.getUniqueId());
+    userData.createUserFile();
 
     // Check if the player has permission to receive plugin update messages.
     if(!Utilities.checkPermissions(player, true, "deathwarden.update", "deathwarden.admin")) {
@@ -49,9 +44,9 @@ public class PlayerListener implements Listener {
     }
 
     if(configFile.getBoolean("Death_Effects_Login") && Utilities.checkPermissions(player, true, "deathwarden.deatheffects.login", "deathwarden.admin")) {
-      storageManager.getDeathEffectsMap().put(player.getUniqueId(), true);
+      plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), true);
     } else {
-      storageManager.getDeathEffectsMap().put(player.getUniqueId(), false);
+      plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), false);
     }
 
     new SpigotUpdater(plugin, 73535).getVersion(version -> {
@@ -77,8 +72,8 @@ public class PlayerListener implements Listener {
     final Player player = playerQuitEvent.getPlayer();
 
     // Remove the player from the map, if they have an entry stored in it
-    storageManager.getDeathLocation().remove(player.getUniqueId());
-    storageManager.getDeathEffectsMap().remove(player.getUniqueId());
+    plugin.getSettingsHandler().getDeathLocation().remove(player.getUniqueId());
+    plugin.getSettingsHandler().getDeathEffectsMap().remove(player.getUniqueId());
     MenuCreator.getOpenInventories().remove(player.getUniqueId());
   }
 
