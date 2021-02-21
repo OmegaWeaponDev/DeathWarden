@@ -38,6 +38,9 @@ Death_Effects_Restart: true
 # Whether the player should be penalised for not having the money to pay when they die
 Death_Penalty: true
 
+# Set this to false if you want another plugin to handle the /back command
+Register_Back_Command: true
+
 # Sets a potion effect the player recieves when they don't have enough money
 # Requires Death_Penalty to be set to true
 Death_Penalty_Effect:
@@ -106,4 +109,4 @@ Time_Format: AUS
 Update_Notify: true
 
 # DO NOT EDIT THIS!
-Config_Version: 2.0
+Config_Version: 2.1

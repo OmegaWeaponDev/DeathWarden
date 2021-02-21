@@ -85,13 +85,13 @@ permissions:
     description: Allows the user to open the death effects menu
     default: false
   deathwarden.deatheffects.login:
-    description: Allows the user to keep thier death effects when login/logout
+    description: Allows the user to keep their death effects when login/logout
     default: false
   deathwarden.deatheffects.sound:
-    description: Allows the user to edit thier death sounds
+    description: Allows the user to edit their death sounds
     default: false
   deathwarden.deatheffects.particle:
-    description: Allows the user to edit thier death particles
+    description: Allows the user to edit their death particles
     default: false
   deathwarden.back:
     description: Grants the user access to the back command
@@ -100,7 +100,7 @@ permissions:
     description: Allows the user to keep xp on death
     default: false
   deathwarden.keepinv:
-    description: Allows the user to keep all thier items on death
+    description: Allows the user to keep all their items on death
     default: false
   deathwarden.deathcount:
     description: Grants the user access to the deathcount view command

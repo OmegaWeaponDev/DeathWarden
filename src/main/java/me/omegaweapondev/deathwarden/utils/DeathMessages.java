@@ -28,6 +28,10 @@ public class DeathMessages {
   }
 
   public void deathByCreatures() {
+    if(!configFile.getBoolean("Death_Messages")) {
+      return;
+    }
+
     if(!player.isDead()) {
       return;
     }
@@ -118,6 +122,10 @@ public class DeathMessages {
   }
 
   public void deathByEnvironment() {
+    if(!configFile.getBoolean("Death_Messages")) {
+      return;
+    }
+
     if(!player.isDead()) {
       return;
     }
@@ -131,6 +139,10 @@ public class DeathMessages {
   }
 
   public void deathByPlayer() {
+    if(!configFile.getBoolean("Death_Messages")) {
+      return;
+    }
+
     if(killer == null) {
       return;
     }

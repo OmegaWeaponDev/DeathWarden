@@ -112,7 +112,11 @@ public class DeathWarden extends JavaPlugin {
     Utilities.logInfo(true, "Registering Commands...");
 
     Utilities.setCommand().put("deathwarden", new DeathWardenCommnad(plugin));
-    Utilities.setCommand().put("back", new BackCommand(plugin));
+
+    if(getSettingsHandler().getConfigFile().getConfig().getBoolean("Register_Back_Command")) {
+      Utilities.setCommand().put("back", new BackCommand(plugin));
+    }
+
     Utilities.setCommand().put("deatheffects", new DeathEffectsCommand(plugin));
     Utilities.setCommand().put("deathcount", new DeathCountCommand(plugin));
     Utilities.setCommand().put("deathwardenreset", new ResetPlayerCommand(plugin));
