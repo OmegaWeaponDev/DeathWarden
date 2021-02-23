@@ -61,11 +61,11 @@ public class PlayerDeathListener implements Listener {
       userData.savePlayerData();
     }
 
-    if(Utilities.checkPermissions(player, true, "deathwarden.keepinv", "deathwarden.admin")) {
+    if(Utilities.checkPermissions(player, false, "deathwarden.keepinv", "deathwarden.admin")) {
       keepInventory(playerDeathEvent, player);
     }
 
-    if(Utilities.checkPermissions(player, true, "deathwarden.keepxp", "deathwarden.admin")) {
+    if(Utilities.checkPermissions(player, false, "deathwarden.keepxp", "deathwarden.admin")) {
       keepExperience(playerDeathEvent, player);
     }
 

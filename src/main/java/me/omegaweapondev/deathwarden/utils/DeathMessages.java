@@ -53,7 +53,7 @@ public class DeathMessages {
           messageHandler.string(
             "Death_By.Creatures.Evoker",
             "&c%player% needs to leave the evil evokers alone from now on"
-          ).replace("%player%", player.getDisplayName())
+          ).replace("%player%", player.getDisplayName()).replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
         );
         return;
       }
@@ -67,7 +67,7 @@ public class DeathMessages {
           messageHandler.string(
             "Death_By.Creatures.Enderdragon",
             "&b%player% died trying to steal the dragons egg..."
-          ).replace("%player%", player.getDisplayName())
+          ).replace("%player%", player.getDisplayName()).replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
         );
         return;
       }
@@ -81,7 +81,7 @@ public class DeathMessages {
           messageHandler.string(
             "Death_By.Creatures.Skeleton",
             "&b%player% just took an arrow to the knee by a skeleton"
-          ).replace("%player%", player.getDisplayName())
+          ).replace("%player%", player.getDisplayName()).replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
         );
         return;
       }
@@ -91,7 +91,7 @@ public class DeathMessages {
           messageHandler.string(
             "Death_By.Creatures.Pillager",
             "&bYou never know what you're going to get with pillagers... right %player%?"
-          ).replace("%player%", player.getDisplayName())
+          ).replace("%player%", player.getDisplayName()).replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
         );
         return;
       }
@@ -108,14 +108,14 @@ public class DeathMessages {
         messageHandler.string(
           "Death_By.Creatures.Ghast",
           "&b%player% just tried to play dodgeball with a ghast and lost"
-        ).replace("%player%", player.getDisplayName())
+        ).replace("%player%", player.getDisplayName()).replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
       );
       return;
     }
 
     for(String creature : messageHandler.configSection("Death_By.Creatures").getKeys(false)) {
       if(((EntityDamageByEntityEvent) player.getLastDamageCause()).getDamager().getType() == EntityType.valueOf(creature.toUpperCase())) {
-        Utilities.broadcast(messageHandler.string("Death_By.Creatures." + creature, "#ff4a4aYou have been killed by a " + creature).replace("%player%", player.getDisplayName()));
+        Utilities.broadcast(messageHandler.string("Death_By.Creatures." + creature, "#ff4a4aYou have been killed by a " + creature).replace("%player%", player.getDisplayName()).replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ())));
         return;
       }
     }
@@ -132,7 +132,7 @@ public class DeathMessages {
 
     for(String deathCause : messageHandler.configSection("Death_By.Environmental").getKeys(false)) {
       if(player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.valueOf(deathCause.toUpperCase())) {
-        Utilities.broadcast(messageHandler.string("Death_By.Environmental." + deathCause, "#ff4a4aYou were killed by " + deathCause).replace("%player%", player.getDisplayName()));
+        Utilities.broadcast(messageHandler.string("Death_By.Environmental." + deathCause, "#ff4a4aYou were killed by " + deathCause).replace("%player%", player.getDisplayName()).replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ())));
         return;
       }
     }
@@ -161,6 +161,7 @@ public class DeathMessages {
         .replace("%killer%", killer.getName())
         .replace("%weapon%", weapon)
         .replace("%hearts_remaining%", String.valueOf(killer.getHealth() / 2))
+        .replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
       );
     }
   }
