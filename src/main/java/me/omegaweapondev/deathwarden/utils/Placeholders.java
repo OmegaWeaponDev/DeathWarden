@@ -77,6 +77,10 @@ public class Placeholders extends PlaceholderExpansion {
   public String onPlaceholderRequest(Player player, String identifier) {
     userData = new UserDataHandler(plugin, player, player.getUniqueId());
 
+    if(player == null) {
+      return "";
+    }
+
     // %deathwarden_hasDeathEffects%
     if(identifier.equalsIgnoreCase("hasdeatheffects")) {
       return String.valueOf(userData.getPlayerData().getBoolean("Death_Effects.Enabled"));

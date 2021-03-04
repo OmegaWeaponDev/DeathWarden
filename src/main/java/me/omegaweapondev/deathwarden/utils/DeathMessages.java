@@ -2,12 +2,22 @@ package me.omegaweapondev.deathwarden.utils;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.ou.library.Utilities;
+import me.ou.library.chat.ChatComponent;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Content;
+import net.md_5.bungee.api.chat.hover.content.Text;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.meta.Damageable;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 
 public class DeathMessages {
   private final DeathWarden plugin;
@@ -147,22 +157,64 @@ public class DeathMessages {
       return;
     }
 
-    if(configFile.getBoolean("Death_By_Player_Messages")) {
-      String weapon;
+    if(!configFile.getBoolean("Death_By_Player_Messages")) {
+      return;
+    }
 
-      if(killer.getInventory().getItemInMainHand().getType().isAir()) {
-        weapon = "their own fists";
-      } else {
-        weapon = (killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) ? killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName() : killer.getInventory().getItemInMainHand().getType().name();
-      }
-
-      Utilities.broadcast(messageHandler.string("PvP_Death_Messages.Killed_By_Player", "#ff4a4a%killer% &bhas just killed #ff4a4a%player% &busing #ff4a4a%weapon% &band they only had #ff4a4a%hearts_remaining% &bhearts left!")
-        .replace("%player%", player.getName())
-        .replace("%killer%", killer.getName())
-        .replace("%weapon%", weapon)
-        .replace("%hearts_remaining%", String.valueOf(killer.getHealth() / 2))
-        .replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
+    if(killer.getInventory().getItemInMainHand().getType().isAir()) {
+      String weaponText = Utilities.colourise(
+        "#00D4FFWeapon Name: #FF4A4A" + killer.getDisplayName() + "'s own two fists" +
+          "\n#00D4FFWeapon Type: #FF4A4A" + "Hands" +
+          "\n#00D4FFHas Enchants: #FF4A4A" + killer.getDisplayName() + " wish they had enchants" +
+          "\n#00D4FFDurability: #FF4A4A" + "bruised and bleeding" +
+          "\n#00D4FFLore: " + Arrays.asList("#FF4A4AWho needs weapons", "\n#FF4A4Awhen you have fists", "\n#FF4A4Alike these!")
       );
+
+      for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+        new ChatComponent(
+          Utilities.colourise(
+            messageHandler.string("PvP_Death_Message", "#FF003E%killer% #00D4FFhas just killed #FF003E%player% #00D4FFusing #FF003E%weapon% #00D4FFand they only had #FF003E%hearts_remaining% #00D4FFhearts left!")
+            .replace("%killer%", killer.getDisplayName())
+            .replace("%player%", player.getDisplayName())
+            .replace("%weapon%", killer.getDisplayName() + "#FF4A4A's own two fists")
+            .replace("%hearts_remaining%", String.valueOf(killer.getHealth() / 2))
+            .replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
+          )
+        ).onHover(HoverEvent.Action.SHOW_TEXT, weaponText).send(onlinePlayer);
+      }
+      return;
+    }
+
+    Damageable damageable = (Damageable) killer.getInventory().getItemInMainHand().getItemMeta();
+
+    String weaponName;
+
+    if(killer.getInventory().getItemInMainHand().hasItemMeta() && killer.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) {
+      weaponName = killer.getInventory().getItemInMainHand().getItemMeta().getDisplayName();
+    } else {
+      weaponName = killer.getInventory().getItemInMainHand().getType().toString();
+    }
+
+    String weaponText = "&9Weapon Name: &c" + weaponName +
+      "\n&9Weapon Type: &c" + killer.getInventory().getItemInMainHand().getType().name() +
+      "\n&9Has Enchants: &c" + killer.getInventory().getItemInMainHand().getItemMeta().hasEnchants() +
+      "\n&9Durability: &c" + (killer.getInventory().getItemInMainHand().getType().getMaxDurability() - damageable.getDamage()) + " / " + killer.getInventory().getItemInMainHand().getType().getMaxDurability() +
+      "\n&9Lore: &c" + (killer.getInventory().getItemInMainHand().getItemMeta().getLore() == null ? "none" : killer.getInventory().getItemInMainHand().getItemMeta().getLore());
+
+    for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+      new ChatComponent(Utilities.colourise("&cTesting this.")).onHover("&cThis is a hover test").send(onlinePlayer);
+
+
+      new ChatComponent(
+        Utilities.colourise(
+          messageHandler.string("PvP_Death_Messages", "#FF003E%killer% #00D4FFhas just killed #FF003E%player% #00D4FFusing #FF003E%weapon% #00D4FFand they only had #FF003E%hearts_remaining% #00D4FFhearts left!")
+            .replace("%killer%", killer.getDisplayName())
+            .replace("%player%", player.getDisplayName())
+            .replace("%weapon%", weaponName)
+            .replace("%hearts_remaining%", String.valueOf(killer.getHealth() / 2))
+            .replace("%coords%", ("X: " + player.getLocation().getX() + ", Y: " + player.getLocation().getY() + ", Z: " + player.getLocation().getZ()))
+        )
+      ).onHover(weaponText).send(onlinePlayer);
     }
   }
 }

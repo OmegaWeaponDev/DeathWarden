@@ -37,6 +37,10 @@ public class MessageHandler {
     return messagesFile.getConfigurationSection(message);
   }
 
+  public boolean getConfigBoolean(final String booleanValue) {
+    return messagesFile.getBoolean(booleanValue);
+  }
+
   public String getPrefix() {
     if(messagesFile.getString("Prefix") == null) {
       getErrorMessage("Prefix");

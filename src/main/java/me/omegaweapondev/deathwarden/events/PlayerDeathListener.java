@@ -116,7 +116,7 @@ public class PlayerDeathListener implements Listener {
           return;
         }
 
-        if(Utilities.checkPermissions(player, true, "omegadeath.penalty.bypass", "omegadeath.admin")) {
+        if(Utilities.checkPermissions(player, false, "omegadeath.penalty.bypass", "omegadeath.admin")) {
           return;
         }
 

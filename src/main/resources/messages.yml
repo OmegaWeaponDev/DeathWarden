@@ -53,8 +53,8 @@ Pvp_Kill_Counter:
   Has_Kills: "#00D4FFYou have killed players %pvpkills% times!"
   No_Kills: "#00D4FFYou have not killed any players!"
 
-PvP_Death_Messages:
-  Killed_By_Player: "#FF003E%killer% #00D4FFhas just killed #FF003E%player% #00D4FFusing #FF003E%weapon% #00D4FFand they only had #FF003E%hearts_remaining% #00D4FFhearts left!"
+# Unique death message for when a player kills another player
+PvP_Death_Messages: "#FF003E%killer% #00D4FFhas just killed #FF003E%player% #00D4FFusing #FF003E%weapon% #00D4FFand they only had #FF003E%hearts_remaining% #00D4FFhearts left!"
 
 Death_By:
   # Customize all the death messages for when hostile mobs kill a player

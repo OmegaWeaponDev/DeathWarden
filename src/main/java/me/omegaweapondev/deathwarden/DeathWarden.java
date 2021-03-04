@@ -11,6 +11,7 @@ import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.SpigotUpdater;
 import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
+import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -24,6 +25,7 @@ public class DeathWarden extends JavaPlugin {
   private SettingsHandler settingsHandler;
   private UserDataHandler userData;
   private Economy econ = null;
+  private Chat chat = null;
 
   private ParticleMenu particleMenu;
   private SoundMenu soundMenu;
@@ -40,6 +42,7 @@ public class DeathWarden extends JavaPlugin {
     setupCommands();
     setupEvents();
     setupEconomy();
+    setupChat();
     spigotUpdater();
     populateMapOnReload();
   }
@@ -150,6 +153,12 @@ public class DeathWarden extends JavaPlugin {
     return econ != null;
   }
 
+  private boolean setupChat() {
+    RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+    chat = rsp.getProvider();
+    return chat != null;
+  }
+
   private void spigotUpdater() {
 
     // The Updater
@@ -190,6 +199,10 @@ public class DeathWarden extends JavaPlugin {
 
   public Economy getEconomy() {
     return econ;
+  }
+
+  public Chat getChat() {
+    return chat;
   }
 
   public SettingsHandler getSettingsHandler() {

@@ -83,7 +83,6 @@ public class ParticleMenu extends MenuCreator {
 
       return itemCreator.getItem();
     }
-
     itemCreator = new ItemCreator(Material.getMaterial(material.toUpperCase()));
     itemCreator.setDisplayName(name);
 
