@@ -52,6 +52,7 @@ permissions:
       - deathwarden.rewards.exempt
       - deathwarden.commands.admin
       - deathwarden.commands.deathbynonplayer.exempt
+      - deathwarden.penalty.bypass
       - deathwarden.reset.player
       - deathwarden.resettotaldeaths
       - deathwarden.reset.pvpkills
@@ -134,4 +135,7 @@ permissions:
     default: false
   deathwarden.reset.pvpkills:
     description: Allows the user to reset the pvpkills logs
+    default: false
+  deathwarden.penalty.bypass:
+    description: Allows the user to bypass the penalty effects
     default: false

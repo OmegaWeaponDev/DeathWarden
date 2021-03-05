@@ -13,6 +13,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -116,7 +117,7 @@ public class PlayerDeathListener implements Listener {
           return;
         }
 
-        if(Utilities.checkPermissions(player, false, "omegadeath.penalty.bypass", "omegadeath.admin")) {
+        if(Utilities.checkPermissions(player, false, "deathwarden.penalty.bypass", "deathwarden.admin")) {
           return;
         }
 
@@ -225,7 +226,7 @@ public class PlayerDeathListener implements Listener {
         Utilities.message(player, messageHandler.string("Death_Penalty", "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"));
 
         for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
-          Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Timer") * 20, configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Amplifier"), true, true, true);
+          Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Timer"), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Amplifier"), true, true, true);
         }
         plugin.getSettingsHandler().getPenaltyMap().put(player.getUniqueId(), true);
         return;
@@ -240,7 +241,7 @@ public class PlayerDeathListener implements Listener {
       Utilities.message(player, messageHandler.string("Death_Penalty", "#00D4FFYou have been penalised for not having the required money to pay the death taxes"));
 
       for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
-        Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Timer") * 20, configFile.getInt("Death_Penalty_Effect." + potionEffect + ".Amplifier"), true, true, true);
+        Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Timer"), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Amplifier"), true, true, true);
       }
       plugin.getSettingsHandler().getPenaltyMap().put(player.getUniqueId(), true);
       return;
