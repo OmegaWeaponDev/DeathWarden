@@ -41,9 +41,25 @@ Death_Penalty: true
 # Set this to false if you want another plugin to handle the /back command
 Register_Back_Command: true
 
-# Sets a potion effect the player recieves when they don't have enough money
+# Sets a potion effect the player recieves when they don't have enough money for the death tax
 # Requires Death_Penalty to be set to true
 Death_Penalty_Effect:
+  # The potion effects to apply
+  # The Timer is in seconds
+  Potion_Effect:
+    WEAKNESS:
+      Amplifier: 1
+      Timer: 10
+    CONFUSION:
+      Amplifier: 1
+      Timer: 10
+    SLOW:
+      Amplifier: 1
+      Timer: 10
+
+# Sets a potion effect the player recieves when they don't have enough money to pay for death tax
+# Requires Death_Penalty to be set to true
+Kill_Penalty_Effect:
   # The potion effects to apply
   # The Timer is in seconds
   Potion_Effect:
@@ -69,6 +85,19 @@ Death_Tax:
     # Take an exact amount from the player money when they die.
     Enabled: true
     # The exact amount to be taken
+    Amount: 10.00
+
+# Sets the amount of money that gets taken from the users account when they kill another player
+# You can use either a percentage or an exact amount
+Kill_Tax:
+  Percentage:
+    # Take a percentage of the players money when they kill another player
+    Enabled: false
+    # The percentage amount to the taken
+    Amount: 10.00
+  Exact_Amount:
+    # Take an exact amount from the players money when they kill another player
+    Enabled: true
     Amount: 10.00
 
 # Set custom commands that are run when a player dies
@@ -109,4 +138,4 @@ Time_Format: AUS
 Update_Notify: true
 
 # DO NOT EDIT THIS!
-Config_Version: 2.1
+Config_Version: 2.2

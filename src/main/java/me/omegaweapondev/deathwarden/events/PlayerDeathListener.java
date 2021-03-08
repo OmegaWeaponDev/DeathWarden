@@ -78,6 +78,7 @@ public class PlayerDeathListener implements Listener {
       deathMessages = new DeathMessages(plugin, player, player.getKiller(), null);
       deathMessages.deathByPlayer();
 
+      withdrawKillMoney(player.getKiller());
       logPvpDeath(player, player.getKiller());
       userData = new UserDataHandler(plugin, player.getKiller(), player.getKiller().getUniqueId());
       int pvpKills = userData.getPlayerData().getInt("Pvp_Kills");
@@ -251,6 +252,44 @@ public class PlayerDeathListener implements Listener {
 
     plugin.getEconomy().withdrawPlayer(player, calculatePercentage(percentageAmount, playerBalance));
     Utilities.message(player, messageHandler.string("Death_Money", "#00D4FFThe amount of #ff4a4a$%money_taken% #00D4FFhas been taken from your account to pay for the death costs").replace("%money_taken%", df.format(calculatePercentage(percentageAmount, playerBalance))));
+  }
+
+  private void withdrawKillMoney(final Player killer) {
+    final double percentageAmount = configFile.getDouble("Kill_Tax.Percentage.Amount");
+    final double configAmount = configFile.getDouble("Kill_Tax.Exact_Amount.Amount");
+    final double playerBalance = plugin.getEconomy().getBalance(killer);
+
+    if(!configFile.getBoolean("Kill_Tax.Percentage.Enabled")) {
+
+      if(!(plugin.getEconomy().getBalance(killer) >= configAmount)) {
+        Utilities.message(killer, messageHandler.string("Kill_Tax_Penalty", "#ff4a4aYou have been penalised for not having the required money to pay the kill taxes"));
+
+        for(String potionEffect : configFile.getConfigurationSection("Kill_Penalty_Effect.Potion_Effect").getKeys(false)) {
+          Utilities.addPotionEffect(killer, PotionEffectType.getByName(potionEffect), configFile.getInt("Kill_Penalty_Effect.Potion_Effect." + potionEffect + ".Timer"), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Amplifier"), true, true, true);
+        }
+        plugin.getSettingsHandler().getPenaltyMap().put(killer.getUniqueId(), true);
+        return;
+      }
+
+      plugin.getEconomy().withdrawPlayer(killer, configAmount);
+      Utilities.message(killer, messageHandler.string("Kill_Tax", "#00D4FFThe amount of #ff4a4a$%money_taken% #00D4FFhas been taken from your account to pay for the kill tax").replace("%money_taken%", String.valueOf(configAmount)));
+      return;
+    }
+
+    if(!(plugin.getEconomy().getBalance(killer) >= calculatePercentage(percentageAmount, playerBalance))) {
+      Utilities.message(killer, messageHandler.string("Kill_Tax_Penalty", "#00D4FFYou have been penalised for not having the required money to pay the kill taxes"));
+
+      for(String potionEffect : configFile.getConfigurationSection("Kill_Penalty_Effect.Potion_Effect").getKeys(false)) {
+        Utilities.addPotionEffect(killer, PotionEffectType.getByName(potionEffect), configFile.getInt("Kill_Penalty_Effect.Potion_Effect." + potionEffect + ".Timer"), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Amplifier"), true, true, true);
+      }
+      plugin.getSettingsHandler().getPenaltyMap().put(killer.getUniqueId(), true);
+      return;
+    }
+
+    DecimalFormat df = new DecimalFormat("###.##");
+
+    plugin.getEconomy().withdrawPlayer(killer, calculatePercentage(percentageAmount, playerBalance));
+    Utilities.message(killer, messageHandler.string("Death_Tax", "#00D4FFThe amount of #ff4a4a$%money_taken% #00D4FFhas been taken from your account to pay for the kill tax").replace("%money_taken%", df.format(calculatePercentage(percentageAmount, playerBalance))));
   }
 
   private double calculatePercentage(final double percentageAmount, final double playerBalance) {
