@@ -26,10 +26,10 @@ Death_Effects_Applied: "#00D4FFEnjoy your new cool death effects!"
 Death_Effects_Removed: "#00D4FFBack to the old boring deaths."
 
 # Sets the message players get when money gets taken from their account when they die.
-Death_Money: "#00D4FF The amount of $#ff4a4a%money_taken% #00D4FFhas been taken from your account to pay for the death costs"
+Death_Tax: "#00D4FF The amount of $#ff4a4a%money_taken% #00D4FFhas been taken from your account to pay for the death costs"
 
 # Sets the message players get when they don't have the money for the death cost.
-Death_Penalty: "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"
+Death_Tax_Penalty: "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"
 
 # Sets the message players get when money gets taken from their account when they die.
 Kill_Tax: "#00D4FF The amount of $#ff4a4a%money_taken% #00D4FFhas been taken from your account to pay the kill tax"
@@ -132,4 +132,4 @@ Reload_Message: "#560900DeathWarden #00D4FFhas successfully been reloaded"
 No_Permission: "#FF003ESorry, you sadly don't have the required permission for that!"
 
 # DO NOT EDIT THIS!
-Config_Version: 2.1
+Config_Version: 2.2

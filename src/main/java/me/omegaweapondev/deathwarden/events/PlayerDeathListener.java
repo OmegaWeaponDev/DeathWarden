@@ -224,7 +224,7 @@ public class PlayerDeathListener implements Listener {
     if(!configFile.getBoolean("Death_Tax.Percentage.Enabled")) {
 
       if(plugin.getEconomy().getBalance(player) < configAmount) {
-        Utilities.message(player, messageHandler.string("Death_Penalty", "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"));
+        Utilities.message(player, messageHandler.string("Death_Tax_Penalty", "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"));
 
         for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
           Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Timer"), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Amplifier"), true, true, true);
@@ -234,12 +234,12 @@ public class PlayerDeathListener implements Listener {
       }
 
       plugin.getEconomy().withdrawPlayer(player, configAmount);
-      Utilities.message(player, messageHandler.string("Death_Money", "#00D4FFThe amount of #ff4a4a$%money_taken% #00D4FFhas been taken from your account to pay for the death costs").replace("%money_taken%", String.valueOf(configAmount)));
+      Utilities.message(player, messageHandler.string("Death_Tax", "#00D4FFThe amount of #ff4a4a$%money_taken% #00D4FFhas been taken from your account to pay for the death costs").replace("%money_taken%", String.valueOf(configAmount)));
       return;
     }
 
     if(plugin.getEconomy().getBalance(player) < calculatePercentage(percentageAmount, playerBalance) || plugin.getEconomy().getBalance(player) == 0.0) {
-      Utilities.message(player, messageHandler.string("Death_Penalty", "#00D4FFYou have been penalised for not having the required money to pay the death taxes"));
+      Utilities.message(player, messageHandler.string("Death_Tax_Penalty", "#00D4FFYou have been penalised for not having the required money to pay the death taxes"));
 
       for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
         Utilities.addPotionEffect(player, PotionEffectType.getByName(potionEffect), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Timer"), configFile.getInt("Death_Penalty_Effect.Potion_Effect." + potionEffect + ".Amplifier"), true, true, true);
@@ -251,7 +251,7 @@ public class PlayerDeathListener implements Listener {
     DecimalFormat df = new DecimalFormat("###.##");
 
     plugin.getEconomy().withdrawPlayer(player, calculatePercentage(percentageAmount, playerBalance));
-    Utilities.message(player, messageHandler.string("Death_Money", "#00D4FFThe amount of #ff4a4a$%money_taken% #00D4FFhas been taken from your account to pay for the death costs").replace("%money_taken%", df.format(calculatePercentage(percentageAmount, playerBalance))));
+    Utilities.message(player, messageHandler.string("Death_Tax", "#00D4FFThe amount of #ff4a4a$%money_taken% #00D4FFhas been taken from your account to pay for the death costs").replace("%money_taken%", df.format(calculatePercentage(percentageAmount, playerBalance))));
   }
 
   private void withdrawKillMoney(final Player killer) {
