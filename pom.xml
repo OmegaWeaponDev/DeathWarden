@@ -18,7 +18,7 @@
   <groupId>me.omegaweapondev</groupId>
   <artifactId>deathwarden</artifactId>
   <name>DeathWarden</name>
-  <version>3.0.6</version>
+  <version>3.0.7</version>
   <description>Become the death warden of your server and control how players die!</description>
 
   <!--
