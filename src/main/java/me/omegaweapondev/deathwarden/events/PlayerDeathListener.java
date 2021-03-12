@@ -223,7 +223,7 @@ public class PlayerDeathListener implements Listener {
 
     if(!configFile.getBoolean("Death_Tax.Percentage.Enabled")) {
 
-      if(!(plugin.getEconomy().getBalance(player) >= configAmount)) {
+      if(plugin.getEconomy().getBalance(player) < configAmount) {
         Utilities.message(player, messageHandler.string("Death_Penalty", "#ff4a4aYou have been penalised for not having the required money to pay the death taxes"));
 
         for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
@@ -238,7 +238,7 @@ public class PlayerDeathListener implements Listener {
       return;
     }
 
-    if(!(plugin.getEconomy().getBalance(player) >= calculatePercentage(percentageAmount, playerBalance))) {
+    if(plugin.getEconomy().getBalance(player) < calculatePercentage(percentageAmount, playerBalance) || plugin.getEconomy().getBalance(player) == 0.0) {
       Utilities.message(player, messageHandler.string("Death_Penalty", "#00D4FFYou have been penalised for not having the required money to pay the death taxes"));
 
       for(String potionEffect : configFile.getConfigurationSection("Death_Penalty_Effect.Potion_Effect").getKeys(false)) {
@@ -261,7 +261,7 @@ public class PlayerDeathListener implements Listener {
 
     if(!configFile.getBoolean("Kill_Tax.Percentage.Enabled")) {
 
-      if(!(plugin.getEconomy().getBalance(killer) >= configAmount)) {
+      if(plugin.getEconomy().getBalance(killer) < configAmount) {
         Utilities.message(killer, messageHandler.string("Kill_Tax_Penalty", "#ff4a4aYou have been penalised for not having the required money to pay the kill taxes"));
 
         for(String potionEffect : configFile.getConfigurationSection("Kill_Penalty_Effect.Potion_Effect").getKeys(false)) {
@@ -276,7 +276,7 @@ public class PlayerDeathListener implements Listener {
       return;
     }
 
-    if(!(plugin.getEconomy().getBalance(killer) >= calculatePercentage(percentageAmount, playerBalance))) {
+    if(plugin.getEconomy().getBalance(killer) < calculatePercentage(percentageAmount, playerBalance) || plugin.getEconomy().getBalance(player) == 0.0) {
       Utilities.message(killer, messageHandler.string("Kill_Tax_Penalty", "#00D4FFYou have been penalised for not having the required money to pay the kill taxes"));
 
       for(String potionEffect : configFile.getConfigurationSection("Kill_Penalty_Effect.Potion_Effect").getKeys(false)) {
