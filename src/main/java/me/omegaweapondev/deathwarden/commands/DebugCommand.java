@@ -6,11 +6,18 @@ import me.ou.library.Utilities;
 import me.ou.library.commands.GlobalCommand;
 import me.ou.library.menus.MenuCreator;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class DebugCommand extends GlobalCommand {
+import java.util.Collections;
+import java.util.List;
+
+public class DebugCommand extends GlobalCommand implements TabCompleter {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
 
@@ -80,5 +87,10 @@ public class DebugCommand extends GlobalCommand {
       " " + plugins.toString(),
       "==========================================="
     );
+  }
+
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    return Collections.emptyList();
   }
 }

@@ -1,9 +1,9 @@
 package me.omegaweapondev.deathwarden.menus;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
-import me.omegaweapondev.deathwarden.utils.ItemCreator;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.ou.library.Utilities;
+import me.ou.library.builders.ItemBuilder;
 import me.ou.library.menus.MenuCreator;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,7 +20,6 @@ public class DeathEffectsMenu extends MenuCreator {
 
   private SoundMenu soundMenu;
   private ParticleMenu particleMenu;
-  private ItemCreator itemCreator;
 
   public DeathEffectsMenu(final DeathWarden plugin, int inventoryRows, String inventoryName, String defaultInventoryName) {
     super(inventoryRows, inventoryName, defaultInventoryName);
@@ -54,36 +53,12 @@ public class DeathEffectsMenu extends MenuCreator {
   }
 
   private ItemStack createItem(final String deathEffectItem) {
-
-    if(Material.getMaterial(deathEffectsMenu.getString(deathEffectItem + ".Material").toUpperCase()) == null) {
-      itemCreator = new ItemCreator(Material.BARRIER);
-      itemCreator.setDisplayName("#ff4a4aInvalid Material");
-      itemCreator.setLore("#ff4a4aThis item is invalid.", "#ff4a4aPlease pick another material to use", "#ff4a4athat is supported by your server version");
-
-      return itemCreator.getItem();
-    }
-
-    itemCreator = new ItemCreator(Material.getMaterial(deathEffectsMenu.getString(deathEffectItem + ".Material").toUpperCase()));
-    itemCreator.setDisplayName(deathEffectsMenu.getString(deathEffectItem + ".Title"));
-    itemCreator.setLore(deathEffectsMenu.getStringList(deathEffectsMenu + ".Lore"));
-
-    return itemCreator.getItem();
+    ItemBuilder itemBuilder = new ItemBuilder(Material.getMaterial(deathEffectsMenu.getString(deathEffectItem + ".Material")));
+    return itemBuilder.checkInvalidMaterial(deathEffectsMenu.getString(deathEffectItem + ".Material"), deathEffectsMenu.getString(deathEffectItem + ".Title"), deathEffectsMenu.getStringList(deathEffectsMenu + ".Lore"));
   }
 
   private ItemStack createItemStack(final String material, final String name, final List<String> lore) {
-    if(Material.getMaterial(material.toUpperCase()) == null) {
-      itemCreator = new ItemCreator(Material.BARRIER);
-      itemCreator.setDisplayName("#570000Invalid Material");
-      itemCreator.setLore("#ff4a4aThis item is invalid.", "#ff4a4aPlease pick another material to use", "#ff4a4athat is supported by your server version");
-
-      return itemCreator.getItem();
-    }
-
-    itemCreator = new ItemCreator(Material.getMaterial(material.toUpperCase()));
-    itemCreator.setDisplayName(name);
-
-    itemCreator.setLore(lore);
-
-    return itemCreator.getItem();
+    ItemBuilder itemBuilder = new ItemBuilder(Material.getMaterial(material));
+    return itemBuilder.checkInvalidMaterial(material, name, lore);
   }
 }

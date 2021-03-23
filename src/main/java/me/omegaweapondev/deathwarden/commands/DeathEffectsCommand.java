@@ -5,11 +5,20 @@ import me.omegaweapondev.deathwarden.menus.DeathEffectsMenu;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.Utilities;
+import me.ou.library.builders.TabCompleteBuilder;
 import me.ou.library.commands.PlayerCommand;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class DeathEffectsCommand extends PlayerCommand {
+import java.util.Collections;
+import java.util.List;
+
+public class DeathEffectsCommand extends PlayerCommand implements TabCompleter {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
   private final FileConfiguration deathEffectsConfig;
@@ -64,5 +73,16 @@ public class DeathEffectsCommand extends PlayerCommand {
       deathEffectsMenu = new DeathEffectsMenu(plugin, 3, deathEffectsConfig.getString("Death_Effects_Menu.Menu_Title"), "#00D4FFDeath Effects Menu");
       deathEffectsMenu.openInventory(player);
     }
+  }
+
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    if(strings.length <= 1) {
+      return new TabCompleteBuilder(commandSender)
+        .checkCommand("edit", true, "deathwarden.deatheffects.edit", "deathwarden.admin")
+        .build(strings[0]);
+    }
+
+    return Collections.emptyList();
   }
 }

@@ -5,10 +5,17 @@ import me.omegaweapondev.deathwarden.utils.CreaturesKilledUtil;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.ou.library.Utilities;
 import me.ou.library.commands.GlobalCommand;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class ResetTotalDeathsLogCommand extends GlobalCommand {
+import java.util.Collections;
+import java.util.List;
+
+public class ResetTotalDeathsLogCommand extends GlobalCommand implements TabCompleter {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
   private final CreaturesKilledUtil creaturesKilledUtil;
@@ -43,5 +50,10 @@ public class ResetTotalDeathsLogCommand extends GlobalCommand {
 
     plugin.getSettingsHandler().getTotalDeathsLog().saveConfig();
     Utilities.logInfo(true, messageHandler.console("Reset_Total_Deaths_Log", "#00D4FFTotal Deaths Log has now been reset."));
+  }
+
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    return Collections.emptyList();
   }
 }

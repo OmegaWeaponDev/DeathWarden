@@ -18,7 +18,7 @@
   <groupId>me.omegaweapondev</groupId>
   <artifactId>deathwarden</artifactId>
   <name>DeathWarden</name>
-  <version>3.0.7</version>
+  <version>3.0.8</version>
   <description>Become the death warden of your server and control how players die!</description>
 
   <!--
@@ -124,7 +124,7 @@
     <dependency>
       <groupId>me.ou</groupId>
       <artifactId>library</artifactId>
-      <version>1.4.1</version>
+      <version>1.6.2</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

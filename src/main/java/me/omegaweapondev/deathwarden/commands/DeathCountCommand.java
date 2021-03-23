@@ -5,9 +5,16 @@ import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.Utilities;
 import me.ou.library.commands.PlayerCommand;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class DeathCountCommand extends PlayerCommand {
+import java.util.Collections;
+import java.util.List;
+
+public class DeathCountCommand extends PlayerCommand implements TabCompleter {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
 
@@ -34,5 +41,10 @@ public class DeathCountCommand extends PlayerCommand {
     }
 
     Utilities.message(player, messageHandler.string("Death_Count.Has_Died", "#00D4FFYou have died #FF003E %deathCount% #00D4FFtimes already!").replace("%deathCount%", String.valueOf(deathCount)));
+  }
+
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    return Collections.emptyList();
   }
 }

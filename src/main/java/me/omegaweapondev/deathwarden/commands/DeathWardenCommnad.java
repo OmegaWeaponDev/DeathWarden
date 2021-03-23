@@ -3,17 +3,25 @@ package me.omegaweapondev.deathwarden.commands;
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.ou.library.Utilities;
+import me.ou.library.builders.TabCompleteBuilder;
 import me.ou.library.commands.GlobalCommand;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class DeathWardenCommnad extends GlobalCommand {
+import java.util.Collections;
+import java.util.List;
+
+public class DeathWardenCommnad extends GlobalCommand implements TabCompleter {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
 
-  public DeathWardenCommnad(final DeathWarden plugin) {
+  public DeathWardenCommnad(final DeathWarden plugin){
     this.plugin = plugin;
     messageHandler = new MessageHandler(plugin, plugin.getSettingsHandler().getMessagesFile().getConfig());
   }
@@ -156,5 +164,18 @@ public class DeathWardenCommnad extends GlobalCommand {
         "==========================================="
       );
     }
+  }
+
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    if(strings.length <= 1) {
+      return new TabCompleteBuilder(commandSender)
+        .checkCommand("version", true, "deathwarden.admin")
+        .checkCommand("help", true, "deathwarden.admin")
+        .checkCommand("reload", true, "deathwarden.reload", "deathwarden.admin")
+        .build(strings[0]);
+    }
+
+    return Collections.emptyList();
   }
 }

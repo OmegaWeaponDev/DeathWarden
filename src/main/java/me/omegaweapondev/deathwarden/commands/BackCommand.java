@@ -4,9 +4,16 @@ import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.MessageHandler;
 import me.ou.library.Utilities;
 import me.ou.library.commands.PlayerCommand;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class BackCommand extends PlayerCommand {
+import java.util.Collections;
+import java.util.List;
+
+public class BackCommand extends PlayerCommand implements TabCompleter {
   private final DeathWarden plugin;
   private final MessageHandler messageHandler;
 
@@ -29,5 +36,10 @@ public class BackCommand extends PlayerCommand {
     player.teleport(plugin.getSettingsHandler().getDeathLocation().get(player.getUniqueId()));
     plugin.getSettingsHandler().getDeathLocation().remove(player.getUniqueId());
     Utilities.message(player, messageHandler.string("Back_On_Death", "#00D4FFYou have returned to your last known death location."));
+  }
+
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    return Collections.emptyList();
   }
 }

@@ -52,8 +52,8 @@ public class SettingsHandler {
         ConfigUpdater.update(plugin, "config.yml", getConfigFile().getFile(), Arrays.asList("none"));
       }
 
-      if(getMessagesFile().getConfig().getDouble("Config_Version") != 2.1) {
-        getMessagesFile().getConfig().set("Config_Version", 2.1);
+      if(getMessagesFile().getConfig().getDouble("Config_Version") != 2.2) {
+        getMessagesFile().getConfig().set("Config_Version", 2.2);
         getMessagesFile().saveConfig();
         ConfigUpdater.update(plugin, "messages.yml", getMessagesFile().getFile(), Arrays.asList("none"));
       }
