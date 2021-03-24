@@ -50,6 +50,14 @@ public class PlayerDeathListener implements Listener {
     userData = new UserDataHandler(plugin, player, player.getUniqueId());
     final Location deathLocation = player.getLocation();
 
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
+
     deathEffects(player);
 
     if(Utilities.checkPermissions(player, true, "deathwarden.back", "deathwarden.admin")) {
@@ -109,6 +117,14 @@ public class PlayerDeathListener implements Listener {
   @EventHandler
   public void onPlayerRespawn(PlayerRespawnEvent playerRespawnEvent) {
     Player player = playerRespawnEvent.getPlayer();
+
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
 
     new BukkitRunnable() {
       @Override

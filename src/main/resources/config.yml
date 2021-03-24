@@ -128,6 +128,14 @@ Death_By_NonPlayer:
   Commands:
     - eco take %player% 10
 
+# The list of worlds that death effects will be disabled in.
+# All Death Effects, totals, logging and rewards will be disabled for the worlds.
+Disabled_Worlds:
+  Enabled: true
+  Worlds:
+    - world_the_end
+    - world_nether
+
 # Which time-format the time stamp in the log.yml will be displayed in
 # Options are: AUS (dd.mm.yyy hh:mm:ss) OR US (mm.dd.yyyy hh:mm:ss) OR CHN (yyyy.mm.dd hh:mm:ss)
 # Defaults to AUS if option is invalid
@@ -138,4 +146,4 @@ Time_Format: AUS
 Update_Notify: true
 
 # DO NOT EDIT THIS!
-Config_Version: 2.2
+Config_Version: 2.3

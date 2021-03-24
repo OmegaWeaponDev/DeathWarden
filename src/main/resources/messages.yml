@@ -125,6 +125,9 @@ Reset_Total_Deaths_Log: "#00D4FFTotal Deaths Log has now been reset."
 # The message received when resetting the pvpkills file.
 PvpKills_Reset: "#00D4FFThe PvpLogs file has been reset."
 
+# The message players receive when they try and use death effects command in a world where it's been disabled
+World_Disabled: "#FF4A4ASorry, Death effects have been disabled for this world."
+
 # Sets the message the player is sent when they reload the plugin
 Reload_Message: "#560900DeathWarden #00D4FFhas successfully been reloaded"
 
@@ -132,4 +135,4 @@ Reload_Message: "#560900DeathWarden #00D4FFhas successfully been reloaded"
 No_Permission: "#FF003ESorry, you sadly don't have the required permission for that!"
 
 # DO NOT EDIT THIS!
-Config_Version: 2.2
+Config_Version: 2.3

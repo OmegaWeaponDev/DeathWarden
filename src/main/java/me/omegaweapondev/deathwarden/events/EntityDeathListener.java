@@ -2,6 +2,7 @@ package me.omegaweapondev.deathwarden.events;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
 import me.omegaweapondev.deathwarden.utils.UserDataHandler;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,11 +12,13 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 public class EntityDeathListener implements Listener {
   private final DeathWarden plugin;
+  private final FileConfiguration configFile;
 
   private UserDataHandler userData;
 
   public EntityDeathListener(final DeathWarden plugin) {
     this.plugin = plugin;
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
@@ -28,6 +31,14 @@ public class EntityDeathListener implements Listener {
 
     if(entityDeathEvent.getEntity().getKiller() == null) {
       return;
+    }
+
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(entityDeathEvent.getEntity().getKiller().getWorld().getName().equals(world)) {
+          return;
+        }
+      }
     }
 
     userData = new UserDataHandler(plugin, entityDeathEvent.getEntity().getKiller(), entityDeathEvent.getEntity().getKiller().getUniqueId());

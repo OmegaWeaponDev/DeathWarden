@@ -4,6 +4,7 @@ import me.omegaweapondev.deathwarden.DeathWarden;
 import me.ou.library.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,9 +18,11 @@ import java.util.Random;
 
 public class RewardsListener implements Listener {
   private final DeathWarden plugin;
+  private final FileConfiguration configFile;
 
   public RewardsListener(final DeathWarden plugin) {
     this.plugin = plugin;
+    configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
@@ -35,12 +38,28 @@ public class RewardsListener implements Listener {
       return;
     }
 
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
+
     rewardLimits(player, entityType);
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onPlayerJoin(PlayerJoinEvent playerJoinEvent) {
     Player player = playerJoinEvent.getPlayer();
+
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
 
     if(!plugin.getSettingsHandler().getRewardsFile().getConfig().getBoolean("Reward_Limits.Enabled")) {
       return;
@@ -67,6 +86,14 @@ public class RewardsListener implements Listener {
   }
 
   private void giveReward(final Player player, final String entity) {
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
+
     if(!plugin.getSettingsHandler().getRewardsFile().getConfig().getBoolean("Kill_Rewards")) {
       return;
     }
@@ -111,6 +138,14 @@ public class RewardsListener implements Listener {
   }
 
   private void rewardLimits(final Player player, final EntityType entity) {
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
+
     final Integer limitAmount = plugin.getSettingsHandler().getRewardLimitsMap().get(player.getUniqueId());
 
     if(!plugin.getSettingsHandler().getRewardsFile().getConfig().getBoolean("Reward_Limits.Enabled")) {

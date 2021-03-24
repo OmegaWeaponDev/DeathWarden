@@ -46,14 +46,14 @@ public class SettingsHandler {
     Utilities.logInfo(true, "Attempting to update the config files....");
 
     try {
-      if(getConfigFile().getConfig().getDouble("Config_Version") != 2.2) {
-        getConfigFile().getConfig().set("Config_Version", 2.2);
+      if(getConfigFile().getConfig().getDouble("Config_Version") != 2.3) {
+        getConfigFile().getConfig().set("Config_Version", 2.3);
         getConfigFile().saveConfig();
         ConfigUpdater.update(plugin, "config.yml", getConfigFile().getFile(), Arrays.asList("none"));
       }
 
-      if(getMessagesFile().getConfig().getDouble("Config_Version") != 2.2) {
-        getMessagesFile().getConfig().set("Config_Version", 2.2);
+      if(getMessagesFile().getConfig().getDouble("Config_Version") != 2.3) {
+        getMessagesFile().getConfig().set("Config_Version", 2.3);
         getMessagesFile().saveConfig();
         ConfigUpdater.update(plugin, "messages.yml", getMessagesFile().getFile(), Arrays.asList("none"));
       }

@@ -7,6 +7,8 @@ import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.Utilities;
 import me.ou.library.builders.TabCompleteBuilder;
 import me.ou.library.commands.PlayerCommand;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -37,6 +39,15 @@ public class DeathEffectsCommand extends PlayerCommand implements TabCompleter {
   @Override
   protected void execute(Player player, String[] strings) {
     userData = new UserDataHandler(plugin, player, player.getUniqueId());
+
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          Utilities.message(player, messageHandler.string("World_Disabled", "#FF4A4ASorry, Death effects have been disabled for this world."));
+          return;
+        }
+      }
+    }
 
     if(strings.length == 0) {
       if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects", "deathwarden.admin")) {

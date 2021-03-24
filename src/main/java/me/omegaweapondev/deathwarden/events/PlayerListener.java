@@ -35,6 +35,14 @@ public class PlayerListener implements Listener {
     // Get the player that is joining
     final Player player = playerJoinEvent.getPlayer();
 
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
+
     userData = new UserDataHandler(plugin, player, player.getUniqueId());
     userData.createUserFile();
 
@@ -80,6 +88,14 @@ public class PlayerListener implements Listener {
   @EventHandler(priority = EventPriority.NORMAL)
   public void onPlayerRespawn(PlayerRespawnEvent playerRespawnEvent) {
     final Player player = playerRespawnEvent.getPlayer();
+
+    if(configFile.getBoolean("Disabled_Worlds.Enabled")) {
+      for(String world : configFile.getStringList("Disabled_Worlds.Worlds")) {
+        if(player.getWorld().getName().equals(world)) {
+          return;
+        }
+      }
+    }
 
     DeathCommands deathCommands = new DeathCommands(plugin, player, null);
     deathCommands.respawnCommands();
