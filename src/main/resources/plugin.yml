@@ -7,8 +7,8 @@ main: ${main.class}
 author: ${pl.author}
 
 softdepend:
-  - Vault
   - PlaceholderAPI
+  - Vault
 
 commands:
   deathwarden:

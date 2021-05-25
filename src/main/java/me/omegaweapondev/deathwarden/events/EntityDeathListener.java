@@ -14,8 +14,6 @@ public class EntityDeathListener implements Listener {
   private final DeathWarden plugin;
   private final FileConfiguration configFile;
 
-  private UserDataHandler userData;
-
   public EntityDeathListener(final DeathWarden plugin) {
     this.plugin = plugin;
     configFile = plugin.getSettingsHandler().getConfigFile().getConfig();
@@ -41,7 +39,11 @@ public class EntityDeathListener implements Listener {
       }
     }
 
-    userData = new UserDataHandler(plugin, entityDeathEvent.getEntity().getKiller(), entityDeathEvent.getEntity().getKiller().getUniqueId());
+    UserDataHandler userData = new UserDataHandler(plugin, entityDeathEvent.getEntity().getKiller(), entityDeathEvent.getEntity().getKiller().getUniqueId());
+
+    if(userData.getPlayerData().getConfigurationSection("Creatures_Killed").getKeys(false).isEmpty()) {
+      return;
+    }
 
     for(String entity : userData.getPlayerData().getConfigurationSection("Creatures_Killed").getKeys(false)) {
 

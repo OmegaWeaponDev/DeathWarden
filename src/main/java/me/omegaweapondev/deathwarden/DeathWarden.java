@@ -11,7 +11,6 @@ import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.SpigotUpdater;
 import me.ou.library.Utilities;
 import me.ou.library.menus.MenuCreator;
-import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -25,7 +24,6 @@ public class DeathWarden extends JavaPlugin {
   private SettingsHandler settingsHandler;
   private UserDataHandler userData;
   private Economy econ = null;
-  private Chat chat = null;
 
   private ParticleMenu particleMenu;
   private SoundMenu soundMenu;
@@ -36,13 +34,22 @@ public class DeathWarden extends JavaPlugin {
     plugin = this;
     settingsHandler = new SettingsHandler(plugin);
 
+    Utilities.logInfo(false,
+
+      " _____ _    _",
+      "|  _  \\ |  | |",
+      "| | | | |  | |  DeathWarden v" + plugin.getDescription().getVersion() + " By OmegaWeaponDev",
+      "| | | | |/\\| |  Running on version: " + Bukkit.getVersion(),
+      "| |/ /\\  /\\  /",
+      "|___/  \\/  \\/"
+    );
+
     initialSetup();
     getSettingsHandler().setupConfigs();
     getSettingsHandler().configUpdater();
     setupCommands();
     setupEvents();
     setupEconomy();
-    setupChat();
     spigotUpdater();
     populateMapOnReload();
   }
@@ -83,10 +90,6 @@ public class DeathWarden extends JavaPlugin {
     // Setup the instance for OU Library
     Utilities.setInstance(this);
 
-    if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-      new Placeholders(this).register();
-    }
-
     if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
       Utilities.logWarning(true,
         "DeathWarden requires PlaceholderAPI to be installed if you are wanting to use the placeholders",
@@ -94,20 +97,15 @@ public class DeathWarden extends JavaPlugin {
       );
     }
 
+    if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+      new Placeholders(this).register();
+    }
+
+
+
     // Setup bStats
     final int bstatsPluginId = 7492;
     Metrics metrics = new Metrics(this, bstatsPluginId);
-
-    // Logs a message to console, saying that the plugin has enabled correctly.
-    Utilities.logInfo(true,
-
-    " _____ _    _",
-    "|  _  \\ |  | |",
-    "| | | | |  | |  DeathWarden v" + plugin.getDescription().getVersion() + " By OmegaWeaponDev",
-    "| | | | |/\\| |  Become the death warden of your server and control how players die!",
-    "| |/ /\\  /\\  /  Currently supporting Spigot 1.13 - 1.16",
-    "|___/  \\/  \\/"
-    );
   }
 
   private void setupCommands() {
@@ -153,12 +151,6 @@ public class DeathWarden extends JavaPlugin {
     return econ != null;
   }
 
-  private boolean setupChat() {
-    RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-    chat = rsp.getProvider();
-    return chat != null;
-  }
-
   private void spigotUpdater() {
 
     // The Updater
@@ -199,10 +191,6 @@ public class DeathWarden extends JavaPlugin {
 
   public Economy getEconomy() {
     return econ;
-  }
-
-  public Chat getChat() {
-    return chat;
   }
 
   public SettingsHandler getSettingsHandler() {

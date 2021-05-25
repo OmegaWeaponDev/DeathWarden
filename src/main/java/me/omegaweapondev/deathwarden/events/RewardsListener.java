@@ -72,6 +72,10 @@ public class RewardsListener implements Listener {
     int configTimer = plugin.getSettingsHandler().getRewardsFile().getConfig().getInt("Reward_Limits.Limit_Cooldown");
 
     Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+      if(!plugin.getSettingsHandler().getRewardLimitsMap().containsKey(player.getUniqueId())) {
+        return;
+      }
+
       if(plugin.getSettingsHandler().getRewardLimitsMap().get(player.getUniqueId()) == plugin.getSettingsHandler().getRewardsFile().getConfig().getInt("Reward_Limits.Limit_Amount")) {
         plugin.getSettingsHandler().getRewardLimitsMap().put(player.getUniqueId(), 0);
         Utilities.message(player, plugin.getSettingsHandler().getRewardsFile().getConfig().getString("Reward_Limits.Limit_Reset", "&bYour rewards limit has been reset."));
@@ -167,6 +171,10 @@ public class RewardsListener implements Listener {
           return;
         }
       }
+      return;
+    }
+
+    if(!plugin.getSettingsHandler().getRewardLimitsMap().containsKey(player.getUniqueId())) {
       return;
     }
 
