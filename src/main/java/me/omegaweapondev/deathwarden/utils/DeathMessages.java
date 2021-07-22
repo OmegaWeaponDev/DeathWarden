@@ -10,8 +10,8 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.meta.Damageable;
-
 import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 
 public class DeathMessages {
@@ -197,7 +197,6 @@ public class DeathMessages {
       "\n&9Lore: &c" + (killer.getInventory().getItemInMainHand().getItemMeta().getLore() == null ? "none" : killer.getInventory().getItemInMainHand().getItemMeta().getLore());
 
     for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-      new ChatComponent(Utilities.colourise("&cTesting this.")).onHover("&cThis is a hover test").send(onlinePlayer);
 
 
       new ChatComponent(

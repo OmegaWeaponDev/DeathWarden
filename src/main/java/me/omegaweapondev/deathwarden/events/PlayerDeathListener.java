@@ -1,8 +1,10 @@
 package me.omegaweapondev.deathwarden.events;
 
 import me.omegaweapondev.deathwarden.DeathWarden;
-import me.omegaweapondev.deathwarden.utils.*;
-import me.ou.library.DateTimeUtils;
+import me.omegaweapondev.deathwarden.utils.DeathCommands;
+import me.omegaweapondev.deathwarden.utils.DeathMessages;
+import me.omegaweapondev.deathwarden.utils.MessageHandler;
+import me.omegaweapondev.deathwarden.utils.UserDataHandler;
 import me.ou.library.Utilities;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -14,14 +16,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class PlayerDeathListener implements Listener {
@@ -45,7 +44,11 @@ public class PlayerDeathListener implements Listener {
 
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onPlayerDeath(final PlayerDeathEvent playerDeathEvent) {
-    playerDeathEvent.setDeathMessage(null);
+
+    if(configFile.getBoolean("Death_Messages")) {
+      playerDeathEvent.setDeathMessage(null);
+    }
+
     player = playerDeathEvent.getEntity();
     userData = new UserDataHandler(plugin, player, player.getUniqueId());
     final Location deathLocation = player.getLocation();
