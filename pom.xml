@@ -110,7 +110,7 @@
       <artifactId>spigot-api</artifactId>
 
       <!-- Change this to the latest version to stay up to date -->
-      <version>1.17-R0.1-SNAPSHOT</version>
+      <version>1.17.1-R0.1-SNAPSHOT</version>
 
       <!--
         The scope indicates if this library should be packaged together with our plugin
