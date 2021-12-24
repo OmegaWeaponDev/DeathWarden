@@ -1,10 +1,10 @@
-name: ${project.name}
-version: ${project.version}
-api-version: ${pl.apiver}
-description: ${project.description}
-main: ${main.class}
+name: DeathWarden
+version: 3.0.16
+api-version: 1.13
+description: Become the Death Warden of your server and control how players die!
+main: me.omegaweapondev.deathwarden.DeathWarden
 
-author: ${pl.author}
+author: OmegaWeaponDev
 
 softdepend:
   - PlaceholderAPI
@@ -16,6 +16,7 @@ commands:
     aliases: [dw]
   back:
     description: The back on death command
+    aliases: [return]
   deatheffects:
     description: The toggle command for all the death effects
     aliases: [de, deffects, deathe]
