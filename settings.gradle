@@ -5,3 +5,5 @@
  */
 
 rootProject.name = 'DeathWarden'
+
+includeBuild '../OULibrary'
