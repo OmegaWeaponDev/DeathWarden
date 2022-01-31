@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerListener implements Listener {
   private final DeathWarden plugin;
@@ -45,6 +46,7 @@ public class PlayerListener implements Listener {
 
     userData = new UserDataHandler(plugin, player, player.getUniqueId());
     userData.createUserFile();
+    applyDeathDeathEffects(player);
 
     // Check if the player has permission to receive plugin update messages.
     if(!Utilities.checkPermissions(player, true, "deathwarden.update", "deathwarden.admin")) {
@@ -99,5 +101,32 @@ public class PlayerListener implements Listener {
 
     DeathCommands deathCommands = new DeathCommands(plugin, player, null);
     deathCommands.respawnCommands();
+  }
+
+  private void applyDeathDeathEffects(@NotNull Player player) {
+    if(!configFile.getBoolean("Default_Death_Effects.Enabled")) {
+      return;
+    }
+
+    if(!Utilities.checkPermissions(player, true, "deathwarden.deatheffects.default.exempt", "deathwarden.deatheffects.admin", "deathwarden.admin")) {
+      return;
+    }
+    userData = new UserDataHandler(plugin, player, player.getUniqueId());
+
+    if(!userData.getPlayerData().getBoolean("Death_Effects.Enabled")) {
+      userData.getPlayerData().set("Death_Effects.Enabled", true);
+      plugin.getSettingsHandler().getDeathEffectsMap().put(player.getUniqueId(), true);
+      userData.savePlayerData();
+    }
+
+    if(userData.getPlayerData().getString("Death_Effects.Death_Particle").equalsIgnoreCase("none")) {
+      userData.getPlayerData().set("Death_Effects.Death_Particle", configFile.getString("Default_Death_Effects.Particle", "EXPLOSION_NORMAL").toUpperCase());
+      userData.savePlayerData();
+    }
+
+    if(userData.getPlayerData().getString("Death_Effects.Death_Sound").equalsIgnoreCase("none")) {
+      userData.getPlayerData().set("Death_Effects.Death_Sound", configFile.getString("Default_Death_Effects.Sound", "ENTITY_CAT_DEATH").toUpperCase());
+      userData.savePlayerData();
+    }
   }
 }

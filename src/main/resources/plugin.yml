@@ -1,10 +1,9 @@
-name: DeathWarden
-version: 3.0.16
-api-version: 1.13
+name: ${name}
+version: ${version}
+api-version: ${apiVersion}
 description: Become the Death Warden of your server and control how players die!
-main: me.omegaweapondev.deathwarden.DeathWarden
-
-author: OmegaWeaponDev
+main: {mainClass}
+author: {author}
 
 softdepend:
   - PlaceholderAPI
@@ -74,6 +73,7 @@ permissions:
       - deathwarden.deatheffects.sound
       - deathwarden.deatheffects.login
       - deathwarden.deatheffects.particle
+      - deathwarden.deatheffects.default.exempt
   deathwarden.reload:
     description: Grants the user access to the reload command
     default: false
@@ -94,6 +94,9 @@ permissions:
     default: false
   deathwarden.deatheffects.particle:
     description: Allows the user to edit their death particles
+    default: false
+  deathwarden.deatheffects.default.exempt:
+    description: Allows the user to bypass the default death effects
     default: false
   deathwarden.back:
     description: Grants the user access to the back command

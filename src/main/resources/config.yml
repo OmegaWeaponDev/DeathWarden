@@ -41,6 +41,17 @@ Death_Penalty: true
 # Set this to false if you want another plugin to handle the /back command
 Register_Back_Command: true
 
+# Set the default death effects that all players will get when they join the server
+# The timer/duration is in seconds.
+# Use the permission `deathwarden.deatheffects.default.exempt` to be exempt from receiving them
+Default_Death_Effects:
+  # Whether you're wanting to use death death effects
+  Enabled: false
+  # The specific default death effects you want to use.
+  Effects:
+    Particle: "EXPLOSION_NORMAL"
+    Sound: "ENTITY_CAT_DEATH"
+
 # Sets a potion effect the player recieves when they don't have enough money for the death tax
 # Requires Death_Penalty to be set to true
 Death_Penalty_Effect:
@@ -146,4 +157,4 @@ Time_Format: AUS
 Update_Notify: true
 
 # DO NOT EDIT THIS!
-Config_Version: 2.3
+Config_Version: 2.4

@@ -46,8 +46,8 @@ public class SettingsHandler {
     Utilities.logInfo(true, "Attempting to update the config files....");
 
     try {
-      if(getConfigFile().getConfig().getDouble("Config_Version") != 2.3) {
-        getConfigFile().getConfig().set("Config_Version", 2.3);
+      if(getConfigFile().getConfig().getDouble("Config_Version") != 2.4) {
+        getConfigFile().getConfig().set("Config_Version", 2.4);
         getConfigFile().saveConfig();
         ConfigUpdater.update(plugin, "config.yml", getConfigFile().getFile(), Arrays.asList("none"));
       }

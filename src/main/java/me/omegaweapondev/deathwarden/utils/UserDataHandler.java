@@ -55,8 +55,8 @@ public class UserDataHandler {
 
     userData.createSection("Death_Effects");
     userData.set("Death_Effects.Enabled", false);
-    userData.set("Death_Effects.Death_Sound", "ENTITY_CAT_DEATH");
-    userData.set("Death_Effects.Death_Particle", "EXPLOSION_NORMAL");
+    userData.set("Death_Effects.Death_Sound", "none");
+    userData.set("Death_Effects.Death_Particle", "none");
 
     userData.createSection("Death_Count");
     userData.set("Death_Count", 0);
