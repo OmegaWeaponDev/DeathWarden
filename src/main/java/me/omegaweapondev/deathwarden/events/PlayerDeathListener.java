@@ -164,13 +164,11 @@ public class PlayerDeathListener implements Listener {
     }
 
     if(!userData.getPlayerData().getString("Death_Effects.Death_Particle").equalsIgnoreCase("none")) {
-      String particles = userData.getPlayerData().getString("Death_Effects.Death_Particle");
-      player.spawnParticle(Particle.valueOf(particles), player.getLocation(), 1);
+      player.spawnParticle(Particle.valueOf(userData.getPlayerData().getString("Death_Effects.Death_Particle")), player.getLocation(), 1);
     }
 
     if(!userData.getPlayerData().getString("Death_Effects.Death_Sound").equalsIgnoreCase("none")) {
-      String sound = userData.getPlayerData().getString("Death_Effects.Death_Sound");
-      player.playSound(player.getLocation(), Sound.valueOf(sound), 1, 1);
+      player.playSound(player.getLocation(), Sound.valueOf(userData.getPlayerData().getString("Death_Effects.Death_Sound")), 1, 1);
     }
   }
 
