@@ -2,8 +2,8 @@ name: ${name}
 version: ${version}
 api-version: ${apiVersion}
 description: Become the Death Warden of your server and control how players die!
-main: {mainClass}
-author: {author}
+main: ${mainClass}
+author: ${author}
 
 softdepend:
   - PlaceholderAPI
